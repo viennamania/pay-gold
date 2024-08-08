@@ -1086,6 +1086,8 @@ export default function Index({ params }: any) {
 
     const acceoptSellOrder = (index: number, orderId: string) => {
 
+
+
         if (!user) {
             return;
         }
@@ -1664,6 +1666,8 @@ export default function Index({ params }: any) {
       });
 
       if (order) {
+
+        //console.log('order', order);
 
         // accept sell order
 
