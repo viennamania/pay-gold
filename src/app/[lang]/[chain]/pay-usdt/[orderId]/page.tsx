@@ -1736,846 +1736,862 @@ export default function Index({ params }: any) {
   }
   
 
-
-
-
     
-    return (
+  return (
 
-      <main className="p-4 pb-10 min-h-[100vh] flex items-start justify-center container
-        max-w-screen-lg
-        mx-auto">
+    <main className="p-4 pb-10 min-h-[100vh] flex items-start justify-center container
+      max-w-screen-lg
+      mx-auto">
 
-        <div className="py-0  w-full">
-  
-          {/* goto home button using go back icon
-          history back
-          */}
+      <div className="py-0  w-full">
 
-          {/* logo image goodtether_logo.png */}
-          <div className="flex items-center justify-center gap-2">
-            <Image
-              src="/goodtether_logo.png"
-              alt="GoodTether"
-              width={48}
-              height={48}
-            />
-            <h1 className="text-2xl text-white font-bold">
-              GoodTether
-            </h1>
-          </div>
+        {/* goto home button using go back icon
+        history back
+        */}
 
-
+        {/* logo image goodtether_logo.png */}
+        <div className="flex items-center justify-center gap-2">
+          <Image
+            src="/goodtether_logo.png"
+            alt="GoodTether"
+            width={48}
+            height={48}
+          />
+          <h1 className="text-2xl text-white font-bold">
+            GoodTether
+          </h1>
+        </div>
 
 
-          <AppBarComponent />
-  
-          <div className="hidden mt-4 w-full flex-row gap-5 justify-center mb-10">
-              {/* history back */}
-              {/* if you want to go back to the previous page */}
 
-              <button
-                  onClick={() =>
-                      router.push('/' + params.lang + '/' + params.chain)
-                  }
-                  className="text-zinc-100 font-semibold underline"
-              >
-                {Go_Home}
-              </button>
-              <button
-                onClick={() => router.push('/' + params.lang + '/' + params.chain + '/buy-usdt')}
+
+        <AppBarComponent />
+
+        <div className="hidden mt-4 w-full flex-row gap-5 justify-center mb-10">
+            {/* history back */}
+            {/* if you want to go back to the previous page */}
+
+            <button
+                onClick={() =>
+                    router.push('/' + params.lang + '/' + params.chain)
+                }
                 className="text-zinc-100 font-semibold underline"
-              >
-        
-                {Go_Buy_USDT}
-              </button>
-              {/* Go to Sell USDT */}
-              {/*
-              <button
-                  onClick={() => router.push('/' + params.lang + '/' + params.chain + '/sell-usdt')}
-                  className="text-zinc-100 font-semibold underline"
-              >
-                {Go_Sell_USDT}
-              </button>
-              */}
-          </div>
+            >
+              {Go_Home}
+            </button>
+            <button
+              onClick={() => router.push('/' + params.lang + '/' + params.chain + '/buy-usdt')}
+              className="text-zinc-100 font-semibold underline"
+            >
+      
+              {Go_Buy_USDT}
+            </button>
+            {/* Go to Sell USDT */}
+            {/*
+            <button
+                onClick={() => router.push('/' + params.lang + '/' + params.chain + '/sell-usdt')}
+                className="text-zinc-100 font-semibold underline"
+            >
+              {Go_Sell_USDT}
+            </button>
+            */}
+        </div>
 
-          {address ? (
-            <div className="mt-5 flex flex-col items-center gap-2 mb-4">
+        {address ? (
+          <div className="mt-5 flex flex-col items-center gap-2 mb-4">
 
-              {/* wallet address */}
-              <div className='flex flex-row gap-2 items-center justify-center'>
-                {/* store code */}
-                <div className="text-lg text-white">
-                  상점: {
-                    storecode ? storecode : sellOrders.length > 0 ? sellOrders[0]?.buyer.nickname?.split('@').slice(-1)[0] : ''
-                  }
-                </div>
-                <div className="text-lg text-white">
-                  아이디: {
-                    memberid ? memberid : sellOrders.length > 0 ? sellOrders[0]?.buyer.nickname?.split('@').slice(0, -1).join('@') : ''
-                  }
-                </div>
+            {/* wallet address */}
+            <div className='flex flex-row gap-2 items-center justify-center'>
+              {/* store code */}
+              <div className="text-lg text-white">
+                상점: {
+                  storecode ? storecode : sellOrders.length > 0 ? sellOrders[0]?.buyer.nickname?.split('@').slice(-1)[0] : ''
+                }
               </div>
               <div className="text-lg text-white">
-                  {My_Wallet_Address}
-                </div>
-              <div className='flex flex-row gap-2 items-center justify-center'>
-                <div className="text-sm xl:text-lg text-white">
-                  {address}
-                </div>
-                <button
-                  onClick={() => {
-                    navigator.clipboard.writeText(address);
-                    toast.success(Your_wallet_address_is_copied);
-                  }}
-                  className="text-sm bg-zinc-100 text-black px-4 py-2 rounded-md hover:bg-zinc-200"
-                >
-                  {Copy}
-                </button>
+                아이디: {
+                  memberid ? memberid : sellOrders.length > 0 ? sellOrders[0]?.buyer.nickname?.split('@').slice(0, -1).join('@') : ''
+                }
               </div>
-
-
-              <div className=" flex flex-row items-center justify-center gap-2">
-                <div className="w-1 h-1 bg-green-500 rounded-full"></div>
-                <span className="text-sm text-white">
-                  {Please_keep_Your_Wallet_address_safe}
-                </span>
+            </div>
+            <div className="text-lg text-white">
+                {My_Wallet_Address}
               </div>
-
-              {/* sending to shop address */}
-
-              {orderId && sellOrders.length > 0 && sellOrders[0].status === 'paymentConfirmed' && balance > 0 && (
-
-                <div className='flex flex-row gap-2 items-center justify-center'>
-                  {/* loading image */}
-                  <Image
-                    src="/loading.png"
-                    alt="Loading"
-                    width={24}
-                    height={24}
-                    className='animate-spin'
-                  />
-
-                  <div className="text-lg text-white">
-                   {Waiting_for_the_USDT_to_be_sent_to_the_store_address}
-                  </div>
-                </div>
-
-              )}
-
-
-              {orderId && sellOrders.length > 0 && sellOrders[0].status === 'paymentConfirmed' && balance === 0 && (
-
-                <span className='text-lg text-yellow-500'>
-                  {Successfully_sent_USDT_to_the_store_address}
-                </span>
-
-              )}
-
-               
-
-
-              {/* disconnect button */}
-              {/*
-              
+            <div className='flex flex-row gap-2 items-center justify-center'>
+              <div className="text-sm xl:text-lg text-white">
+                {address}
+              </div>
               <button
                 onClick={() => {
-
-                  activeWallet?.disconnect();
-
-                    
-                    
-                  //window.location.reload();
-
-                  router.push('/' + params.lang + '/' + params.chain + '/pay-usdt/0');
-
-
-
+                  navigator.clipboard.writeText(address);
+                  toast.success(Your_wallet_address_is_copied);
                 }}
-                className="text-lg bg-red-500 text-white px-4 py-2 rounded-md"
+                className="text-sm bg-zinc-100 text-black px-4 py-2 rounded-md hover:bg-zinc-200"
               >
-                {Disconnect_Wallet}
+                {Copy}
               </button>
-              */}
-              
             </div>
 
-          ) : (
 
-            <div className="w-full mt-5 flex flex-row items-center justify-center gap-2 mb-4">
+            <div className=" flex flex-row items-center justify-center gap-2">
+              <div className="w-1 h-1 bg-green-500 rounded-full"></div>
+              <span className="text-sm text-white">
+                {Please_keep_Your_Wallet_address_safe}
+              </span>
+            </div>
+
+            {/* sending to shop address */}
+
+            {orderId && sellOrders.length > 0 && sellOrders[0].status === 'paymentConfirmed' && balance > 0 && (
+
+              <div className='flex flex-row gap-2 items-center justify-center'>
+                {/* loading image */}
+                <Image
+                  src="/loading.png"
+                  alt="Loading"
+                  width={24}
+                  height={24}
+                  className='animate-spin'
+                />
+
+                <div className="text-lg text-white">
+                  {Waiting_for_the_USDT_to_be_sent_to_the_store_address}
+                </div>
+              </div>
+
+            )}
+
+
+            {orderId && sellOrders.length > 0 && sellOrders[0].status === 'paymentConfirmed' && balance === 0 && (
+
+              <span className='text-lg text-yellow-500'>
+                {Successfully_sent_USDT_to_the_store_address}
+              </span>
+
+            )}
+
+              
+
+
+            {/* disconnect button */}
+            {/*
+            
+            <button
+              onClick={() => {
+
+                activeWallet?.disconnect();
+
+                  
+                  
+                //window.location.reload();
+
+                router.push('/' + params.lang + '/' + params.chain + '/pay-usdt/0');
 
 
 
-             {orderId === '0' && (
-                <div className='hidden w-full flex-col xl:flex-row gap-2 items-center xl:items-end justify-center'>
+              }}
+              className="text-lg bg-red-500 text-white px-4 py-2 rounded-md"
+            >
+              {Disconnect_Wallet}
+            </button>
+            */}
+            
+          </div>
 
-                
+        ) : (
+
+          <div className="w-full mt-5 flex flex-row items-center justify-center gap-2 mb-4">
+
+
+
+            {orderId === '0' && (
+              <div className='hidden w-full flex-col xl:flex-row gap-2 items-center xl:items-end justify-center'>
+
+              
+                  <span className="text-sm text-white">
+                    {You_must_have_a_wallet_address_to_buy_USDT}
+                  </span>
+
+                  <div className='flex flex-col gap-2 items-center justify-center'>
+
                     <span className="text-sm text-white">
-                      {You_must_have_a_wallet_address_to_buy_USDT}
+                      {Nickname_should_be_5_10_characters}
                     </span>
 
-                    <div className='flex flex-col gap-2 items-center justify-center'>
+                    <input
+                      type="text"
 
-                      <span className="text-sm text-white">
-                        {Nickname_should_be_5_10_characters}
-                      </span>
+                      value={nickname || ''}
 
-                      <input
-                        type="text"
+                      /*
+                      value={inputNickname}
 
-                        value={nickname || ''}
+                      
+                      onChange={(e) => {
 
-                        /*
-                        value={inputNickname}
 
+                        // check alphabet and number 5-10 characters
+
+                        //e.target.value = e.target.value.replace(/[^a-zA-Z0-9]/g, '');
+
+
+
+
+                        setInputNickname(
+
+                          e.target.value.replace(/[^a-zA-Z0-9]/g, '').substring(0, 10)
+                        );
+
+
+
+                      } }
+                        */
+
+
+
+                      placeholder={Enter_your_nickname}
+                      className="text-lg bg-black text-white px-4 py-2 rounded-md border border-zinc-100"
+                    />
+
+
+                  </div>
+
+
+                    
+                
+                  <button
+                    ///onClick={setUserWithoutWalletAddress}
+                    
+                    ///onClick={() => fetchWalletAddress(inputNickname)}
+
+                    onClick={() => fetchWalletAddress(nickname || '')}
+
+
+                    className="text-lg bg-green-500 text-white px-4 py-2 rounded-md"
+                  >
+                    {Make_Wallet_Address}
+                  </button>
+
+              </div>
+
+            )}
+
+
+
+
+          </div>
+
+        )}
+
+
+
+              {true && (
+                <div className="w-full flex flex-col items-start justify-between gap-2">
+
+                  {/* my usdt balance */}
+                  <div className='hidden w-full  flex-row items-between justify-start gap-5'>
+
+                    <div className=" flex flex-col gap-2 items-start">
+                      <div className="text-5xl font-semibold text-white">
+                        {Number(balance).toFixed(2)} <span className="text-lg">USDT</span>
+                      </div>
+                    </div>
+
+                    <div className="hidden flex-row gap-2 items-center justify-center">
+                      
+                        <Image
+                          src={user?.avatar || "/profile-default.png"}
+                          alt="Avatar"
+                          width={20}
+                          height={20}
+                          priority={true} // Added priority property
+                          className="rounded-full"
+                          style={{
+                              objectFit: 'cover',
+                              width: '20px',
+                              height: '20px',
+                          }}
+                        />
+                        <div className="text-lg font-semibold text-white ">{
+                          user?.nickname ? user.nickname : Anonymous
+                        }</div>
+
+                        {user?.seller && (
+                          <div className="flex flex-row items-center gap-2">
+                            <Image
+                              src="/verified.png"
+                              alt="Verified"
+                              width={24}
+                              height={24}
+                            />
+                            <Image
+                              src="/best-seller.png"
+                              alt="Best Seller"
+                              width={24}
+                              height={24}
+                            />
+                          </div>
+                        )}
+                      
+                    </div>
+                  </div>
+
+
+                  {/* select one of krw amounts combo box */}
+                  {/* combo box */}
+
+                  {/* 10000, 50000, 100000, 300000, 500000, 1000000, 5000000, 10000000 */}
+
+                  {orderId === '0' && (
+
+                    <div className='w-full flex flex-col gap-2 items-center justify-start'>
+
+                      <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 w-full">
+
+                          <button
+                            onClick={() => setSelectedKrwAmount(10000)}
+                            className={`${
+                              selectedKrwAmount === 10000 ? 'bg-green-500' : 'bg-black'
+                            } text-lg text-white px-4 py-2 rounded-md border border-zinc-100`}
+                          >
+                            {PRICE_10000_KRW}
+                          </button>
+
+                          <button
+                            onClick={() => setSelectedKrwAmount(50000)}
+                            className={`${
+                              selectedKrwAmount === 50000 ? 'bg-green-500' : 'bg-black'
+                            } text-lg text-white px-4 py-2 rounded-md border border-zinc-100`}
+                          >
+                            {PRICE_50000_KRW}
+                          </button>
+
+                          <button
+                            onClick={() => setSelectedKrwAmount(100000)}
+                            className={`${
+                              selectedKrwAmount === 100000 ? 'bg-green-500' : 'bg-black'
+                            } text-lg text-white px-4 py-2 rounded-md border border-zinc-100`}
+                          >
+                            {PRICE_100000_KRW}
+                          </button>
+
+                          <button
+                            onClick={() => setSelectedKrwAmount(500000)}
+                            className={`${
+                              selectedKrwAmount === 500000 ? 'bg-green-500' : 'bg-black'
+                            } text-lg text-white px-4 py-2 rounded-md border border-zinc-100`}
+                          >
+                            {PRICE_500000_KRW}
+                          </button>
+
+                          <button
+                            onClick={() => setSelectedKrwAmount(1000000)}
+                            className={`${
+                              selectedKrwAmount === 1000000 ? 'bg-green-500' : 'bg-black'
+                            } text-lg text-white px-4 py-2 rounded-md border border-zinc-100`}
+                          >
+                            {PRICE_1000000_KRW}
+                          </button>
+
+                          <button
+                            onClick={() => setSelectedKrwAmount(5000000)}
+                            className={`${
+                              selectedKrwAmount === 5000000 ? 'bg-green-500' : 'bg-black'
+                            } text-lg text-white px-4 py-2 rounded-md border border-zinc-100`}
+                          >
+                            {PRICE_5000000_KRW}
+                          </button>
+
+                          <button
+                            onClick={() => setSelectedKrwAmount(10000000)}
+                            className={`${
+                              selectedKrwAmount === 10000000 ? 'bg-green-500' : 'bg-black'
+                            } text-lg text-white px-4 py-2 rounded-md border border-zinc-100`}
+                          >
+                            {PRICE_10000000_KRW}
+                          </button>
+
+
+
+                      </div>
+
+
+                      <div className='mt-5 flex flex-row gap-2 items-center justify-center'>
+
+                        {/* input deposit name */}
+                        <span className="text-lg text-white">
+                          {Deposit_Name}
+                        </span>
+
+                        <input
+                          disabled={!address || !selectedKrwAmount || acceptingSellOrderRandom}
+                          type="text"
+                          value={depositName}
+                          onChange={(e) => setDepositName(e.target.value)}
+                          placeholder={Deposit_Name}
+                          className="w-48 text-lg bg-black text-white px-4 py-2 rounded-md border border-zinc-100"
+                        />
                         
-                        onChange={(e) => {
-
-
-                          // check alphabet and number 5-10 characters
-
-                          //e.target.value = e.target.value.replace(/[^a-zA-Z0-9]/g, '');
 
 
 
+                        <button
+                          disabled={!address || !selectedKrwAmount || acceptingSellOrderRandom}
+                          className={`flex flex-row text-lg text-white px-4 py-2 rounded-md
+                          ${!user || !selectedKrwAmount || acceptingSellOrderRandom ? 'bg-zinc-800' : 'bg-green-500 hover:bg-green-600'}
+                          `}
 
-                          setInputNickname(
+                          onClick={() => {
 
-                            e.target.value.replace(/[^a-zA-Z0-9]/g, '').substring(0, 10)
-                          );
+                              // check deposit name is empty
+                              if (!depositName) {
+                                toast.error(Please_enter_deposit_name);
+                                return;
+                              }
 
+                              acceptSellOrderRandom(selectedKrwAmount, depositName);
+                        
 
+                          }}
+                        >
+                          {/* loaaing icon */}
+                          {acceptingSellOrderRandom && (
+                            <Image
+                              src="/loading.png"
+                              alt="Loading"
+                              width={24}
+                              height={24}
+                              className='animate-spin'
+                            />
+                          )}
+                          
+                          <span  className="ml-2">
+                            {Charge}
+                          </span>
 
-                        } }
-                          */
+                        </button>
 
+                      </div>
 
-
-                        placeholder={Enter_your_nickname}
-                        className="text-lg bg-black text-white px-4 py-2 rounded-md border border-zinc-100"
-                      />
+                      {/* deposit name description */}
+                      <div className='flex flex-row gap-2 items-center justify-center'>
+                        <div className="w-1 h-1 bg-green-500 rounded-full"></div>
+                        <span className="text-sm text-white">
+                          {Deposit_name_description}
+                        </span>
+                      </div>
 
 
                     </div>
+                  )}
 
 
-                      
-                  
-                    <button
-                      ///onClick={setUserWithoutWalletAddress}
-                      
-                      ///onClick={() => fetchWalletAddress(inputNickname)}
-
-                      onClick={() => fetchWalletAddress(nickname || '')}
 
 
-                      className="text-lg bg-green-500 text-white px-4 py-2 rounded-md"
-                    >
-                      {Make_Wallet_Address}
-                    </button>
+
 
                 </div>
-
               )}
 
 
 
-
-            </div>
-
-          )}
+            {sellOrders.length > 0 && (
+              <div className="mt-4 w-full flex flex-col gap-5 xl:flex-row items-start justify-center ">
 
 
+                <div className="w-full mb-10 grid grid-cols-1 gap-4  justify-center  ">
 
-                {true && (
-                  <div className="w-full flex flex-col items-start justify-between gap-2">
+                    {sellOrders.map((item, index) => (
 
-                    {/* my usdt balance */}
-                    <div className='hidden w-full  flex-row items-between justify-start gap-5'>
 
-                      <div className=" flex flex-col gap-2 items-start">
-                        <div className="text-5xl font-semibold text-white">
-                          {Number(balance).toFixed(2)} <span className="text-lg">USDT</span>
-                        </div>
-                      </div>
 
-                      <div className="hidden flex-row gap-2 items-center justify-center">
-                        
-                          <Image
-                            src={user?.avatar || "/profile-default.png"}
-                            alt="Avatar"
-                            width={20}
-                            height={20}
-                            priority={true} // Added priority property
-                            className="rounded-full"
-                            style={{
-                                objectFit: 'cover',
-                                width: '20px',
-                                height: '20px',
-                            }}
-                          />
-                          <div className="text-lg font-semibold text-white ">{
-                            user?.nickname ? user.nickname : Anonymous
-                          }</div>
 
-                          {user?.seller && (
-                            <div className="flex flex-row items-center gap-2">
-                              <Image
-                                src="/verified.png"
-                                alt="Verified"
-                                width={24}
-                                height={24}
-                              />
-                              <Image
-                                src="/best-seller.png"
-                                alt="Best Seller"
-                                width={24}
-                                height={24}
-                              />
+                      <div
+                        key={index}
+                        className="relative flex flex-col items-center justify-center"
+                      >
+
+  
+
+
+
+
+                        {item.status === 'ordered' && (new Date().getTime() - new Date(item.createdAt).getTime() > 1000 * 60 * 60 * 24) && (
+                          <div className="absolute inset-0 flex justify-center items-center z-10
+                            bg-black bg-opacity-50
+                          ">
+                            <Image
+                              src="/icon-expired.png"
+                              alt="Expired"
+                              width={100}
+                              height={100}
+                              className="opacity-20"
+                            />
+                          </div>
+                        )}
+
+
+
+                        {item.status === 'cancelled' && (
+                          <div className="absolute inset-0 flex justify-center items-center z-10
+                            bg-black bg-opacity-50
+                          ">
+                            <Image
+                              src="/icon-cancelled.png"
+                              alt="Cancelled"
+                              width={100}
+                              height={100}
+                              className="opacity-20"
+                            />
+                          </div>
+                        )}
+
+
+
+                        <div className=" w-full flex flex-col gap-2 items-center justify-start">
+
+
+                          {address && item.buyer && item.buyer.walletAddress === address && (
+                            <div className="w-full flex flex-row items-center justify-start">
+                              <div className='flex flex-row items-center gap-2'>
+
+                                <Image
+                                    src={item.avatar || '/profile-default.png'}
+                                    alt="Avatar"
+                                    width={32}
+                                    height={32}
+                                    priority={true} // Added priority property
+                                    className="rounded-full"
+                                    style={{
+                                        objectFit: 'cover',
+                                        width: '32px',
+                                        height: '32px',
+                                    }}
+                                />      
+
+
+                                <h2 className="text-lg font-semibold">
+                                    {Seller}: {
+
+                                        item.walletAddress === address ? item.nickname ? item.nickname : Anonymous  + ' :' + Me :
+                                        
+                                        item.nickname ? item.nickname : Anonymous
+
+                                    }
+                                </h2>
+
+                                <Image
+                                    src="/verified.png"
+                                    alt="Verified"
+                                    width={24}
+                                    height={24}
+                                />
+
+                                <Image
+                                  src='/best-seller.png'
+                                  alt='Best Seller'
+                                  width={24}
+                                  height={24}
+                                />
+
+                              </div>
+
                             </div>
                           )}
-                       
-                      </div>
-                    </div>
+
+                          {/* byer information */}
+                          {address && item.walletAddress === address && (
+                            <div className="w-full flex flex-row items-center justify-start">
+                              <div className='flex flex-row items-center gap-2'>
+
+                                <Image
+                                    src={item.buyer?.avatar || '/profile-default.png'}
+                                    alt="Avatar"
+                                    width={32}
+                                    height={32}
+                                    priority={true} // Added priority property
+                                    className="rounded-full"
+                                    style={{
+                                        objectFit: 'cover',
+                                        width: '32px',
+                                        height: '32px',
+                                    }}
+                                />
+
+                                <h2 className="text-lg font-semibold">
+                                    {Buyer}: {
+                                        item.buyer?.nickname ? item.buyer?.nickname : Anonymous
+                                    }
+                                </h2>
+
+                                <Image
+                                    src="/verified.png"
+                                    alt="Verified"
+                                    width={24}
+                                    height={24}
+
+                                />
+
+                                <Image
+                                  src='/icon-buyer.png'
+                                  alt='Best Buyer'
+                                  width={24}
+                                  height={24}
+
+                                />
+
+                              </div>
+      
+                            </div>
 
 
-                    {/* select one of krw amounts combo box */}
-                    {/* combo box */}
-
-                    {/* 10000, 50000, 100000, 300000, 500000, 1000000, 5000000, 10000000 */}
-
-                    {orderId === '0' && (
-
-                      <div className='w-full flex flex-col gap-2 items-center justify-start'>
-
-                        <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 w-full">
-
-                            <button
-                              onClick={() => setSelectedKrwAmount(10000)}
-                              className={`${
-                                selectedKrwAmount === 10000 ? 'bg-green-500' : 'bg-black'
-                              } text-lg text-white px-4 py-2 rounded-md border border-zinc-100`}
-                            >
-                              {PRICE_10000_KRW}
-                            </button>
-
-                            <button
-                              onClick={() => setSelectedKrwAmount(50000)}
-                              className={`${
-                                selectedKrwAmount === 50000 ? 'bg-green-500' : 'bg-black'
-                              } text-lg text-white px-4 py-2 rounded-md border border-zinc-100`}
-                            >
-                              {PRICE_50000_KRW}
-                            </button>
-
-                            <button
-                              onClick={() => setSelectedKrwAmount(100000)}
-                              className={`${
-                                selectedKrwAmount === 100000 ? 'bg-green-500' : 'bg-black'
-                              } text-lg text-white px-4 py-2 rounded-md border border-zinc-100`}
-                            >
-                              {PRICE_100000_KRW}
-                            </button>
-
-                            <button
-                              onClick={() => setSelectedKrwAmount(500000)}
-                              className={`${
-                                selectedKrwAmount === 500000 ? 'bg-green-500' : 'bg-black'
-                              } text-lg text-white px-4 py-2 rounded-md border border-zinc-100`}
-                            >
-                              {PRICE_500000_KRW}
-                            </button>
-
-                            <button
-                              onClick={() => setSelectedKrwAmount(1000000)}
-                              className={`${
-                                selectedKrwAmount === 1000000 ? 'bg-green-500' : 'bg-black'
-                              } text-lg text-white px-4 py-2 rounded-md border border-zinc-100`}
-                            >
-                              {PRICE_1000000_KRW}
-                            </button>
-
-                            <button
-                              onClick={() => setSelectedKrwAmount(5000000)}
-                              className={`${
-                                selectedKrwAmount === 5000000 ? 'bg-green-500' : 'bg-black'
-                              } text-lg text-white px-4 py-2 rounded-md border border-zinc-100`}
-                            >
-                              {PRICE_5000000_KRW}
-                            </button>
-
-                            <button
-                              onClick={() => setSelectedKrwAmount(10000000)}
-                              className={`${
-                                selectedKrwAmount === 10000000 ? 'bg-green-500' : 'bg-black'
-                              } text-lg text-white px-4 py-2 rounded-md border border-zinc-100`}
-                            >
-                              {PRICE_10000000_KRW}
-                            </button>
+                          )}
 
 
 
-                        </div>
 
+                          <article
+                              className={`w-full bg-black p-4 rounded-md border
+                                
+                                ${item.walletAddress === address ? 'border-green-500' : 'border-gray-200'}
 
-                        <div className='mt-5 flex flex-row gap-2 items-center justify-center'>
+                                ${item.status === 'paymentConfirmed' ? 'bg-gray-900 border-gray-900' : ''}
 
-                          {/* input deposit name */}
-                          <span className="text-lg text-white">
-                            {Deposit_Name}
-                          </span>
-
-                          <input
-                            disabled={!address || !selectedKrwAmount || acceptingSellOrderRandom}
-                            type="text"
-                            value={depositName}
-                            onChange={(e) => setDepositName(e.target.value)}
-                            placeholder={Deposit_Name}
-                            className="w-48 text-lg bg-black text-white px-4 py-2 rounded-md border border-zinc-100"
-                          />
-                          
-
-
-
-                          <button
-                            disabled={!address || !selectedKrwAmount || acceptingSellOrderRandom}
-                            className={`flex flex-row text-lg text-white px-4 py-2 rounded-md
-                            ${!user || !selectedKrwAmount || acceptingSellOrderRandom ? 'bg-zinc-800' : 'bg-green-500 hover:bg-green-600'}
-                            `}
-
-                            onClick={() => {
-
-                                // check deposit name is empty
-                                if (!depositName) {
-                                  toast.error(Please_enter_deposit_name);
-                                  return;
-                                }
-
-                                acceptSellOrderRandom(selectedKrwAmount, depositName);
-                          
-
-                            }}
+                                w-96 `
+                              }
                           >
-                            {/* loaaing icon */}
-                            {acceptingSellOrderRandom && (
-                              <Image
-                                src="/loading.png"
-                                alt="Loading"
-                                width={24}
-                                height={24}
-                                className='animate-spin'
-                              />
-                            )}
-                            
-                            <span  className="ml-2">
-                              {Charge}
-                            </span>
 
-                          </button>
+                              {item.status === 'ordered' && (
+                                <div className=" flex flex-col items-start justify-start gap-1">
 
-                        </div>
 
-                        {/* deposit name description */}
-                        <div className='flex flex-row gap-2 items-center justify-center'>
-                          <div className="w-1 h-1 bg-green-500 rounded-full"></div>
-                          <span className="text-sm text-white">
-                            {Deposit_name_description}
-                          </span>
-                        </div>
-
-
-                      </div>
-                    )}
-
-
-
-
-
-
-                  </div>
-                )}
-
-
-
-              {sellOrders.length > 0 && (
-                <div className="mt-4 w-full flex flex-col gap-5 xl:flex-row items-start justify-center ">
-
-
-                  <div className="w-full mb-10 grid grid-cols-1 gap-4  justify-center  ">
-
-                      {sellOrders.map((item, index) => (
-
-
-
-
-                        <div
-                          key={index}
-                          className="relative flex flex-col items-center justify-center"
-                        >
-
-    
-
-
-
-
-                          {item.status === 'ordered' && (new Date().getTime() - new Date(item.createdAt).getTime() > 1000 * 60 * 60 * 24) && (
-                            <div className="absolute inset-0 flex justify-center items-center z-10
-                              bg-black bg-opacity-50
-                            ">
-                              <Image
-                                src="/icon-expired.png"
-                                alt="Expired"
-                                width={100}
-                                height={100}
-                                className="opacity-20"
-                              />
-                            </div>
-                          )}
-
-
-
-                          {item.status === 'cancelled' && (
-                            <div className="absolute inset-0 flex justify-center items-center z-10
-                              bg-black bg-opacity-50
-                            ">
-                              <Image
-                                src="/icon-cancelled.png"
-                                alt="Cancelled"
-                                width={100}
-                                height={100}
-                                className="opacity-20"
-                              />
-                            </div>
-                          )}
-
-
-
-                          <div className=" w-full flex flex-col gap-2 items-center justify-start">
-
-
-                            {address && item.buyer && item.buyer.walletAddress === address && (
-                              <div className="w-full flex flex-row items-center justify-start">
-                                <div className='flex flex-row items-center gap-2'>
-
-                                  <Image
-                                      src={item.avatar || '/profile-default.png'}
-                                      alt="Avatar"
-                                      width={32}
-                                      height={32}
-                                      priority={true} // Added priority property
-                                      className="rounded-full"
-                                      style={{
-                                          objectFit: 'cover',
-                                          width: '32px',
-                                          height: '32px',
-                                      }}
-                                  />      
-
-
-                                  <h2 className="text-lg font-semibold">
-                                      {Seller}: {
-
-                                          item.walletAddress === address ? item.nickname ? item.nickname : Anonymous  + ' :' + Me :
-                                          
-                                          item.nickname ? item.nickname : Anonymous
-
-                                      }
-                                  </h2>
-
-                                  <Image
-                                      src="/verified.png"
-                                      alt="Verified"
-                                      width={24}
-                                      height={24}
-                                  />
-
-                                  <Image
-                                    src='/best-seller.png'
-                                    alt='Best Seller'
-                                    width={24}
-                                    height={24}
-                                  />
-
-                                </div>
-
-                              </div>
-                            )}
-
-                            {/* byer information */}
-                            {address && item.walletAddress === address && (
-                              <div className="w-full flex flex-row items-center justify-start">
-                                <div className='flex flex-row items-center gap-2'>
-
-                                  <Image
-                                      src={item.buyer?.avatar || '/profile-default.png'}
-                                      alt="Avatar"
-                                      width={32}
-                                      height={32}
-                                      priority={true} // Added priority property
-                                      className="rounded-full"
-                                      style={{
-                                          objectFit: 'cover',
-                                          width: '32px',
-                                          height: '32px',
-                                      }}
-                                  />
-
-                                  <h2 className="text-lg font-semibold">
-                                      {Buyer}: {
-                                          item.buyer?.nickname ? item.buyer?.nickname : Anonymous
-                                      }
-                                  </h2>
-
-                                  <Image
-                                      src="/verified.png"
-                                      alt="Verified"
-                                      width={24}
-                                      height={24}
-
-                                  />
-
-                                  <Image
-                                    src='/icon-buyer.png'
-                                    alt='Best Buyer'
-                                    width={24}
-                                    height={24}
-
-                                  />
-
-                                </div>
-        
-                              </div>
-
-
-                            )}
-
-
-
-
-                            <article
-                                className={`w-full bg-black p-4 rounded-md border
-                                  
-                                  ${item.walletAddress === address ? 'border-green-500' : 'border-gray-200'}
-
-                                  ${item.status === 'paymentConfirmed' ? 'bg-gray-900 border-gray-900' : ''}
-
-                                  w-96 `
-                                }
-                            >
-
-                                {item.status === 'ordered' && (
-                                  <div className=" flex flex-col items-start justify-start gap-1">
-
-
-                                    <div className="flex flex-row items-center gap-2">
-                                      {/* new order icon */}
-                                      {
-                                        (new Date(item.createdAt).getTime() - new Date().getTime()) / 1000 / 60 / 60 < 24 && (
-                                          <Image
-                                            src="/icon-new.png"
-                                            alt="New Order"
-                                            width={32}
-                                            height={32}
-                                          />
-                                        )
-                                      } 
-
-
-
-                                      {item.privateSale ? (
-                                          <Image
-                                            src="/icon-private-sale.png"
-                                            alt="Private Sale"
-                                            width={32}
-                                            height={32}
-                                          />
-                                      ) : (
-                                          <Image
-                                            src="/icon-public-sale.png"
-                                            alt="Public Sale"
-                                            width={32}
-                                            height={32}
-                                          />
-                                      )}
-
-                                      
-                                      {/* Expired in 24 hours */}
-                                      <p className=" text-sm text-zinc-400">
-                                        Expired in {24 - Math.floor((new Date().getTime() - new Date(item.createdAt).getTime()) / 1000 / 60 / 60)} {hours}
-                                      </p>
-
-                                    </div>
-
-                                    <p className="mb-4 text-sm text-zinc-400">
-                                      Opened at {
-                                        new Date(item.createdAt).toLocaleDateString() + ' ' + new Date(item.createdAt).toLocaleTimeString()
-                                      }
-                                    </p>
-
-                                  </div>
-                                )}
-
-
-                                { (item.status === 'accepted' || item.status === 'paymentRequested' || item.status === 'paymentConfirmed') && (
-
-                                  <div className='flex flex-row items-center gap-2 bg-white px-2 py-3 rounded-md mb-4'>
-
-                                    {item.status === 'accepted' || item.status === 'paymentRequested' && (
-                                      <Image
-                                        src='/icon-trade.png'
-                                        alt='Trade'
-                                        width={32}
-                                        height={32}
-                                      />
-                                    )}
-
-                                    <p className=" text-xl font-semibold text-green-500 ">
-                                      {TID}: {item.tradeId}
-                                    </p>
-
-
-
-                                    {item.status === 'paymentConfirmed' && (
-
-                                      <div className='flex flex-row items-end gap-2'>
+                                  <div className="flex flex-row items-center gap-2">
+                                    {/* new order icon */}
+                                    {
+                                      (new Date(item.createdAt).getTime() - new Date().getTime()) / 1000 / 60 / 60 < 24 && (
                                         <Image
-                                          src='/confirmed.png'
-                                          alt='Confirmed'
-                                          width={80}
-                                          height={12}
+                                          src="/icon-new.png"
+                                          alt="New Order"
+                                          width={32}
+                                          height={32}
                                         />
-                                      </div>
+                                      )
+                                    } 
 
+
+
+                                    {item.privateSale ? (
+                                        <Image
+                                          src="/icon-private-sale.png"
+                                          alt="Private Sale"
+                                          width={32}
+                                          height={32}
+                                        />
+                                    ) : (
+                                        <Image
+                                          src="/icon-public-sale.png"
+                                          alt="Public Sale"
+                                          width={32}
+                                          height={32}
+                                        />
                                     )}
 
                                     
+                                    {/* Expired in 24 hours */}
+                                    <p className=" text-sm text-zinc-400">
+                                      Expired in {24 - Math.floor((new Date().getTime() - new Date(item.createdAt).getTime()) / 1000 / 60 / 60)} {hours}
+                                    </p>
+
                                   </div>
 
-                                )}
+                                  <p className="mb-4 text-sm text-zinc-400">
+                                    Opened at {
+                                      new Date(item.createdAt).toLocaleDateString() + ' ' + new Date(item.createdAt).toLocaleTimeString()
+                                    }
+                                  </p>
 
-                                {item.acceptedAt && (
-
-                                  <div className='flex flex-col items-start gap-2 mb-2'>
-
+                                </div>
+                              )}
 
 
-                                    <div className='hidden  flex-row items-center gap-2'>
+                              { (item.status === 'accepted' || item.status === 'paymentRequested' || item.status === 'paymentConfirmed') && (
+
+                                <div className='flex flex-row items-center gap-2 bg-white px-2 py-3 rounded-md mb-4'>
+
+                                  {item.status === 'accepted' || item.status === 'paymentRequested' && (
+                                    <Image
+                                      src='/icon-trade.png'
+                                      alt='Trade'
+                                      width={32}
+                                      height={32}
+                                    />
+                                  )}
+
+                                  <p className=" text-xl font-semibold text-green-500 ">
+                                    {TID}: {item.tradeId}
+                                  </p>
+
+
+
+                                  {item.status === 'paymentConfirmed' && (
+
+                                    <div className='flex flex-row items-end gap-2'>
+                                      <Image
+                                        src='/confirmed.png'
+                                        alt='Confirmed'
+                                        width={80}
+                                        height={12}
+                                      />
+                                    </div>
+
+                                  )}
+
                                   
-                                      {item.privateSale ? (
-                                        <Image
-                                          src='/icon-private-sale.png'
-                                          alt='Private Sale'
-                                          width={32}
-                                          height={32}
-                                        />
-                                      ) : (
-                                        <Image
-                                          src='/icon-public-sale.png'
-                                          alt='Public Sale'
-                                          width={32}
-                                          height={32}
-                                        /> 
-                                      )}
-                                      <p className="text-sm text-zinc-400">
-                                        
+                                </div>
 
-                                        {params.lang === 'kr' ? (
+                              )}
+
+                              {item.acceptedAt && (
+
+                                <div className='flex flex-col items-start gap-2 mb-2'>
+
+
+
+                                  <div className='hidden  flex-row items-center gap-2'>
+                                
+                                    {item.privateSale ? (
+                                      <Image
+                                        src='/icon-private-sale.png'
+                                        alt='Private Sale'
+                                        width={32}
+                                        height={32}
+                                      />
+                                    ) : (
+                                      <Image
+                                        src='/icon-public-sale.png'
+                                        alt='Public Sale'
+                                        width={32}
+                                        height={32}
+                                      /> 
+                                    )}
+                                    <p className="text-sm text-zinc-400">
+                                      
+
+                                      {params.lang === 'kr' ? (
+
+                                        <p className="text-sm text-zinc-400">
+
+
+                                          {
+
+                                            new Date().getTime() - new Date(item.createdAt).getTime() < 1000 * 60 ? (
+                                              ' ' + Math.floor((new Date().getTime() - new Date(item.createdAt).getTime()) / 1000) + ' ' + seconds_ago
+                                            ) :
+                                            new Date().getTime() - new Date(item.createdAt).getTime() < 1000 * 60 * 60 ? (
+                                            ' ' + Math.floor((new Date().getTime() - new Date(item.createdAt).getTime()) / 1000 / 60) + ' ' + minutes_ago
+                                            ) : (
+                                              ' ' + Math.floor((new Date().getTime() - new Date(item.createdAt).getTime()) / 1000 / 60 / 60) + ' ' + hours_ago
+                                            )
+                                          }{' '}{Order_Opened} 
+
+                                        </p>
+
+                                        ) : (
 
                                           <p className="text-sm text-zinc-400">
 
 
-                                            {
 
-                                              new Date().getTime() - new Date(item.createdAt).getTime() < 1000 * 60 ? (
-                                                ' ' + Math.floor((new Date().getTime() - new Date(item.createdAt).getTime()) / 1000) + ' ' + seconds_ago
-                                              ) :
-                                              new Date().getTime() - new Date(item.createdAt).getTime() < 1000 * 60 * 60 ? (
-                                              ' ' + Math.floor((new Date().getTime() - new Date(item.createdAt).getTime()) / 1000 / 60) + ' ' + minutes_ago
-                                              ) : (
-                                                ' ' + Math.floor((new Date().getTime() - new Date(item.createdAt).getTime()) / 1000 / 60 / 60) + ' ' + hours_ago
-                                              )
-                                            }{' '}{Order_Opened} 
+                                          {Order_Opened}{' '}{
 
-                                          </p>
-
-                                          ) : (
-
-                                            <p className="text-sm text-zinc-400">
+                                            new Date().getTime() - new Date(item.createdAt).getTime() < 1000 * 60 ? (
+                                              ' ' + Math.floor((new Date().getTime() - new Date(item.createdAt).getTime()) / 1000) + ' ' + seconds_ago
+                                            ) :
+                                            new Date().getTime() - new Date(item.createdAt).getTime() < 1000 * 60 * 60 ? (
+                                            ' ' + Math.floor((new Date().getTime() - new Date(item.createdAt).getTime()) / 1000 / 60) + ' ' + minutes_ago
+                                            ) : (
+                                              ' ' + Math.floor((new Date().getTime() - new Date(item.createdAt).getTime()) / 1000 / 60 / 60) + ' ' + hours_ago
+                                            )
+                                          }
 
 
 
-                                            {Order_Opened}{' '}{
-
-                                              new Date().getTime() - new Date(item.createdAt).getTime() < 1000 * 60 ? (
-                                                ' ' + Math.floor((new Date().getTime() - new Date(item.createdAt).getTime()) / 1000) + ' ' + seconds_ago
-                                              ) :
-                                              new Date().getTime() - new Date(item.createdAt).getTime() < 1000 * 60 * 60 ? (
-                                              ' ' + Math.floor((new Date().getTime() - new Date(item.createdAt).getTime()) / 1000 / 60) + ' ' + minutes_ago
-                                              ) : (
-                                                ' ' + Math.floor((new Date().getTime() - new Date(item.createdAt).getTime()) / 1000 / 60 / 60) + ' ' + hours_ago
-                                              )
-                                            }
+                                        </p>
 
 
-
-                                          </p>
-
-
-                                        )}
+                                      )}
 
 
-                                      </p>
+                                    </p>
 
-                                    </div>
-
-
-                                    <div className='hidden flex-row items-center gap-2'>
-                                      <div className={
-                                        ` ml-4 mr-3 bg-green-500 w-1 h-[20px]
-                                        rounded-full`
-                                      }></div>
-
-                                      {/* difference minutes between payment confirmed and trade started */}
-                                      <div className='flex flex-row items-center gap-2'>
-
-                                        <Image
-                                          src='/timer.png'
-                                          alt='Timer'
-                                          width={32}
-                                          height={32}
-                                        />
-                                        <div className="text-sm text-green-500">
-                                          {
-                                            ( (new Date(item.acceptedAt).getTime() - new Date(item.createdAt).getTime()) / 1000 / 60 ).toFixed(0)
-                                          } {minutes}
-                                        </div>
-                                      </div>
-
-                                    </div>
+                                  </div>
 
 
-                                  
+                                  <div className='hidden flex-row items-center gap-2'>
+                                    <div className={
+                                      ` ml-4 mr-3 bg-green-500 w-1 h-[20px]
+                                      rounded-full`
+                                    }></div>
 
-
+                                    {/* difference minutes between payment confirmed and trade started */}
                                     <div className='flex flex-row items-center gap-2'>
 
                                       <Image
-                                        src='/icon-trade.png'
-                                        alt='Trade'
+                                        src='/timer.png'
+                                        alt='Timer'
                                         width={32}
                                         height={32}
                                       />
+                                      <div className="text-sm text-green-500">
+                                        {
+                                          ( (new Date(item.acceptedAt).getTime() - new Date(item.createdAt).getTime()) / 1000 / 60 ).toFixed(0)
+                                        } {minutes}
+                                      </div>
+                                    </div>
 
-                                      <p className="text-sm text-zinc-400">
+                                  </div>
 
 
-                                      {params.lang === 'kr' ? (
-
-                                        <p className="ml-2 text-sm text-zinc-400">
+                                
 
 
-                                          {new Date().getTime() - new Date(item.acceptedAt).getTime() < 1000 * 60 ? (
+                                  <div className='flex flex-row items-center gap-2'>
+
+                                    <Image
+                                      src='/icon-trade.png'
+                                      alt='Trade'
+                                      width={32}
+                                      height={32}
+                                    />
+
+                                    <p className="text-sm text-zinc-400">
+
+
+                                    {params.lang === 'kr' ? (
+
+                                      <p className="ml-2 text-sm text-zinc-400">
+
+
+                                        {new Date().getTime() - new Date(item.acceptedAt).getTime() < 1000 * 60 ? (
+                                          ' ' + Math.floor((new Date().getTime() - new Date(item.acceptedAt).getTime()) / 1000) + ' ' + seconds_ago
+                                        ) :
+                                        new Date().getTime() - new Date(item.acceptedAt).getTime() < 1000 * 60 * 60 ? (
+                                        ' ' + Math.floor((new Date().getTime() - new Date(item.acceptedAt).getTime()) / 1000 / 60) + ' ' + minutes_ago
+                                        ) : (
+                                          ' ' + Math.floor((new Date().getTime() - new Date(item.acceptedAt).getTime()) / 1000 / 60 / 60) + ' ' + hours_ago
+                                        )
+                                        }{' '}{Trade_Started}
+
+                                      </p>
+
+
+
+                                    ) : (
+
+                                      <p className="ml-2 text-sm text-zinc-400">
+
+                                        {Trade_Started} {
+                                          new Date().getTime() - new Date(item.acceptedAt).getTime() < 1000 * 60 ? (
                                             ' ' + Math.floor((new Date().getTime() - new Date(item.acceptedAt).getTime()) / 1000) + ' ' + seconds_ago
                                           ) :
                                           new Date().getTime() - new Date(item.acceptedAt).getTime() < 1000 * 60 * 60 ? (
@@ -2583,319 +2599,613 @@ export default function Index({ params }: any) {
                                           ) : (
                                             ' ' + Math.floor((new Date().getTime() - new Date(item.acceptedAt).getTime()) / 1000 / 60 / 60) + ' ' + hours_ago
                                           )
-                                          }{' '}{Trade_Started}
+                                        }
 
-                                        </p>
-
-
-
-                                      ) : (
-
-                                        <p className="ml-2 text-sm text-zinc-400">
-
-                                          {Trade_Started} {
-                                            new Date().getTime() - new Date(item.acceptedAt).getTime() < 1000 * 60 ? (
-                                              ' ' + Math.floor((new Date().getTime() - new Date(item.acceptedAt).getTime()) / 1000) + ' ' + seconds_ago
-                                            ) :
-                                            new Date().getTime() - new Date(item.acceptedAt).getTime() < 1000 * 60 * 60 ? (
-                                            ' ' + Math.floor((new Date().getTime() - new Date(item.acceptedAt).getTime()) / 1000 / 60) + ' ' + minutes_ago
-                                            ) : (
-                                              ' ' + Math.floor((new Date().getTime() - new Date(item.acceptedAt).getTime()) / 1000 / 60 / 60) + ' ' + hours_ago
-                                            )
-                                          }
-
-                                        </p>
-
-                                      )}
-                                      
-                                      
                                       </p>
-                                    </div>
 
+                                    )}
+                                    
+                                    
+                                    </p>
                                   </div>
 
-                                )}
+                                </div>
 
-                                {item.status === 'paymentConfirmed' && (
+                              )}
 
-                                  <div className='flex flex-col items-start gap-2 mb-4'>
+                              {item.status === 'paymentConfirmed' && (
 
-                                    {/* vertical line of height for time between trade started  and payment confirmed */}
+                                <div className='flex flex-col items-start gap-2 mb-4'>
 
+                                  {/* vertical line of height for time between trade started  and payment confirmed */}
+
+                                  <div className='flex flex-row items-center gap-2'>
+                                    <div className={
+                                      ` ml-4 mr-3 bg-green-500 w-1 h-[20px]
+                                      rounded-full`
+                                    }></div>
+
+                                    {/* difference minutes between payment confirmed and trade started */}
                                     <div className='flex flex-row items-center gap-2'>
-                                      <div className={
-                                        ` ml-4 mr-3 bg-green-500 w-1 h-[20px]
-                                        rounded-full`
-                                      }></div>
-
-                                      {/* difference minutes between payment confirmed and trade started */}
-                                      <div className='flex flex-row items-center gap-2'>
-
-                                        <Image
-                                          src='/timer.png'
-                                          alt='Timer'
-                                          width={32}
-                                          height={32}
-                                        />
-                                        <div className="text-sm text-green-500">
-                                          { ( (new Date(item.paymentConfirmedAt).getTime() - new Date(item.acceptedAt).getTime()) / 1000 / 60 ).toFixed(0) } {minutes}
-                                        </div>
-                                      </div>
-
-                                    </div>
-
-                                    <div className='flex flex-row items-center gap-2 mb-4'>
-                                      
 
                                       <Image
-                                        src='/icon-completed.png'
-                                        alt='Completed'
+                                        src='/timer.png'
+                                        alt='Timer'
                                         width={32}
                                         height={32}
                                       />
-                                      <p className="text-sm text-green-500">
-                                        {Completed_at} {new Date(item.paymentConfirmedAt).toLocaleDateString() + ' ' + new Date(item.paymentConfirmedAt).toLocaleTimeString()}
-                                      </p>
+                                      <div className="text-sm text-green-500">
+                                        { ( (new Date(item.paymentConfirmedAt).getTime() - new Date(item.acceptedAt).getTime()) / 1000 / 60 ).toFixed(0) } {minutes}
+                                      </div>
                                     </div>
 
                                   </div>
 
-
-
-                                )}
-
-
-                                <div className="mt-4 flex flex-col items-start">
-
-                                  <p className="text-2xl text-zinc-400">
-                                    {Price}: {
-                                      // currency
+                                  <div className='flex flex-row items-center gap-2 mb-4'>
                                     
-                                      Number(item.krwAmount).toLocaleString('ko-KR', {
-                                        style: 'currency',
-                                        currency: 'KRW',
-                                      })
 
-                                    }
-                                  </p>
-
-
-                                  <div className="mt-2 flex flex-row items-between space-x-2">
-
-
-                                    <p className="text-lg font-semibold text-white">{item.usdtAmount} USDT</p>
-                                    <p className="text-lg font-semibold text-white">{Rate}: {
-
-                                      Number(item.krwAmount / item.usdtAmount).toFixed(2)
-
-                                    }</p>
+                                    <Image
+                                      src='/icon-completed.png'
+                                      alt='Completed'
+                                      width={32}
+                                      height={32}
+                                    />
+                                    <p className="text-sm text-green-500">
+                                      {Completed_at} {new Date(item.paymentConfirmedAt).toLocaleDateString() + ' ' + new Date(item.paymentConfirmedAt).toLocaleTimeString()}
+                                    </p>
                                   </div>
 
                                 </div>
 
 
-                              
+
+                              )}
 
 
-                                {item.status === 'paymentConfirmed' && (
-                                  <div className="mt-4 flex flex-col items-start gap-2">
-                                    <p className="mt-4 text-sm text-zinc-400">
-                                      {Payment}: {item.seller?.bankInfo.bankName} {item.seller?.bankInfo.accountNumber} {item.seller?.bankInfo.accountHolder}
-                                    </p> 
-                                    <p className="text-sm text-zinc-400">
-                                      {Deposit_Amount}: {item.krwAmount} KRW
-                                    </p>
-                                    <p className="text-sm text-zinc-400">
-                                      {Deposit_Name}: {
-                                        item.buyer?.depositName ? item.buyer?.depositName : item.tradeId
-                                      }
-                                    </p>                        
+                              <div className="mt-4 flex flex-col items-start">
 
-                                    {/* 판매자가 입급을 확인였습니다. */}
+                                <p className="text-2xl text-zinc-400">
+                                  {Price}: {
+                                    // currency
+                                  
+                                    Number(item.krwAmount).toLocaleString('ko-KR', {
+                                      style: 'currency',
+                                      currency: 'KRW',
+                                    })
 
-                                    <p className="mt-4 text-lg text-green-500">
-                                      {Deposit_Confirmed}
-                                    </p>
-                                  </div>
-                                )}
-                                
+                                  }
+                                </p>
+
+
+                                <div className="mt-2 flex flex-row items-between space-x-2">
+
+
+                                  <p className="text-lg font-semibold text-white">{item.usdtAmount} USDT</p>
+                                  <p className="text-lg font-semibold text-white">{Rate}: {
+
+                                    Number(item.krwAmount / item.usdtAmount).toFixed(2)
+
+                                  }</p>
+                                </div>
+
+                              </div>
+
 
                             
 
 
-                                {/* share button */}
-                                {/*
+                              {item.status === 'paymentConfirmed' && (
+                                <div className="mt-4 flex flex-col items-start gap-2">
+                                  <p className="mt-4 text-sm text-zinc-400">
+                                    {Payment}: {item.seller?.bankInfo.bankName} {item.seller?.bankInfo.accountNumber} {item.seller?.bankInfo.accountHolder}
+                                  </p> 
+                                  <p className="text-sm text-zinc-400">
+                                    {Deposit_Amount}: {item.krwAmount} KRW
+                                  </p>
+                                  <p className="text-sm text-zinc-400">
+                                    {Deposit_Name}: {
+                                      item.buyer?.depositName ? item.buyer?.depositName : item.tradeId
+                                    }
+                                  </p>                        
 
-                                  <div className='flex flex-row items-center justify-end gap-2'>
-                                    <button
-                                        className="flex text-sm bg-blue-500 text-white px-2 py-1 rounded-md"
-                                        onClick={() => {
-                                          
-                                          //router.push(`/sell-usdt/${item._id}`);
+                                  {/* 판매자가 입급을 확인였습니다. */}
 
-                                          // copy link to clipboard
-                                          navigator.clipboard.writeText(`https://next.unove.space/${params.lang}/sell-usdt/${item._id}`);
-                                          toast.success('Link has been copied');
+                                  <p className="mt-4 text-lg text-green-500">
+                                    {Deposit_Confirmed}
+                                  </p>
+                                </div>
+                              )}
+                              
 
-                                        }}
-                                    >
-                                      <Image
-                                        src="/icon-share.png"
-                                        alt="Share"
-                                        width={16}
-                                        height={16}
-                                        className='mr-2'
-                                      />
-                                      Share
-                                    </button>
+                          
+
+
+                              {/* share button */}
+                              {/*
+
+                                <div className='flex flex-row items-center justify-end gap-2'>
+                                  <button
+                                      className="flex text-sm bg-blue-500 text-white px-2 py-1 rounded-md"
+                                      onClick={() => {
+                                        
+                                        //router.push(`/sell-usdt/${item._id}`);
+
+                                        // copy link to clipboard
+                                        navigator.clipboard.writeText(`https://next.unove.space/${params.lang}/sell-usdt/${item._id}`);
+                                        toast.success('Link has been copied');
+
+                                      }}
+                                  >
+                                    <Image
+                                      src="/icon-share.png"
+                                      alt="Share"
+                                      width={16}
+                                      height={16}
+                                      className='mr-2'
+                                    />
+                                    Share
+                                  </button>
+                                </div>
+                                */}
+                              
+
+
+
+                              {/* waiting for escrow */}
+                              {address && item.walletAddress !== address && item.status === 'accepted' && (
+                                  <div className="mt-10 mb-10 flex flex-row gap-2 items-center justify-start">
+
+                                    {/* rotate loading icon */}
+                                  
+                                    <Image
+                                      src="/loading.png"
+                                      alt="Escrow"
+                                      width={32}
+                                      height={32}
+                                      className="animate-spin"
+                                    />
+
+                                    <span>
+                                      {Waiting_for_seller_to_deposit}
+                                      {' '}{item.usdtAmount} USDT
+                                      {' '}{to_escrow}....
+                                    </span>
+
+
+
+
                                   </div>
-                                  */}
-                                
+
+                              )}
 
 
 
-                                {/* waiting for escrow */}
-                                {address && item.walletAddress !== address && item.status === 'accepted' && (
-                                    <div className="mt-10 mb-10 flex flex-row gap-2 items-center justify-start">
 
-                                      {/* rotate loading icon */}
+
+                              {
+                                address && item.walletAddress === address &&  item.status === 'accepted' && (
+
+                                <div className="w-full mt-2 mb-2 flex flex-col items-start ">
+
+
+                                {escrowing[index] && (
+
+                                  <div className="flex flex-col gap-2">
                                     
+                                    <div className="flex flex-row items-center gap-2">
                                       <Image
-                                        src="/loading.png"
-                                        alt="Escrow"
-                                        width={32}
-                                        height={32}
-                                        className="animate-spin"
+                                          src='/loading.png'
+                                          alt='loading'
+                                          width={32}
+                                          height={32}
+                                          className="animate-spin"
                                       />
-
-                                      <span>
-                                        {Waiting_for_seller_to_deposit}
-                                        {' '}{item.usdtAmount} USDT
-                                        {' '}{to_escrow}....
-                                      </span>
-
-
-
-
+                                      <div className="text-lg font-semibold text-white">
+                                        Escrowing {item.usdtAmount} USDT...
+                                      </div>
                                     </div>
+
+                                  </div>
 
                                 )}
 
 
+                                {escrowing[index] === false && requestingPayment[index] === true && (
+                                  <div className="flex flex-col gpa-2">
+                                    {Escrow} {item.usdtAmount} USDT to the smart contract has been completed.
+                                  </div>
+                                )}
+
+
+                                {requestingPayment[index] && (
+
+                                  <div className="p-2 flex flex-col gap-2">
+                                    
+                                    <div className="flex flex-row items-center gap-2">
+                                      <Image
+                                          src='/loading.png'
+                                          alt='loading'
+                                          width={50}
+                                          height={50}
+                                          className="animate-spin"
+                                      />
+                                      <div className="text-lg font-semibold text-white">
+                                        {Requesting_Payment}...
+                                      </div>
+                                    </div>
+
+                                  </div>
+
+                                )}
+
+
+                                <div className="mt-5 flex flex-row items-center gap-2">
+                                  {/* dot */}
+                                  <div  className="w-2 h-2 rounded-full bg-green-500"></div>
+
+                                  <div className="text-sm text-zinc-400">
+                                    {/*
+                                    If you request payment, the {item.usdtAmount} USDT will be escrowed to the smart contract and then the buyer ( {item.buyer.nickname} ) will be requested to pay.
+                                    */}
+
+                                    {If_you_request_payment}
+                                  </div>
+                                </div>
+
+                                <div className="mt-5 flex flex-row items-center gap-2">
+                                    
+                                    <div className="flex flex-row items-center gap-2">
+                                      <input
+                                          type="checkbox"
+                                          checked={requestPaymentCheck[index]}
+                                          onChange={(e) => {
+                                            setRequestPaymentCheck(
+                                              requestPaymentCheck.map((item, idx) => {
+                                                if (idx === index) {
+                                                  return e.target.checked;
+                                                }
+                                                return item;
+                                              })
+                                            );
+                                          }}
+                                          className=" w-6 h-6 rounded-md border border-gray-200"
+                                      />
+                                    </div>
+                                    <div className="text-sm text-zinc-400">
+                                      {/*
+                                      I agree to escrow {item.usdtAmount} USDT to the smart contract and request payment to the buyer ( {item.buyer.nickname} )
+                                      */}
+
+                                        {I_agree_to_escrow_USDT}
+
+                                    </div>
+                                </div>
 
 
 
-                                {
-                                  address && item.walletAddress === address &&  item.status === 'accepted' && (
+                                <div className="mt-4 flex flex-col gap-2 text-sm text-left text-white">
+                                  <div className='flex flex-row items-center gap-2'>
+                                    {/* dot */}
+                                    <div  className="w-2 h-2 rounded-full bg-green-500"></div>
+                                    <span>
+                                      {Bank_Transfer} {Deposit_Information}
+                                    </span>
+                                  </div>
+                                  <ul>
+                                    <li>
+                                      {item.seller?.bankInfo.bankName}
+                                      {' '}
+                                      <button
+                                        onClick={() => {
+                                            navigator.clipboard.writeText(item.seller?.bankInfo.accountNumber);
+                                            toast.success(Account_number_has_been_copied);
+                                        } }
+                                        className='text-lg font-semibold'
+                                      >
+                                        {item.seller?.bankInfo.accountNumber}
+                                      </button>
+                                      {' '}
+                                      {item.seller?.bankInfo.accountHolder}
+                                    </li>
+                                    <li>{Deposit_Amount} : {item.krwAmount} KRW</li>
+                                    <li>{Deposit_Name} : {
+                                      item.buyer?.depositName ? item.buyer?.depositName : item.tradeId
+                                    }</li>
+                                  </ul>
+                                </div>
 
-                                  <div className="w-full mt-2 mb-2 flex flex-col items-start ">
+
+                                <button
+                                    disabled={
+                                      balance < item.usdtAmount || requestingPayment[index] || escrowing[index]
+                                      || !requestPaymentCheck[index]
+                                    }
+                                    className={`w-full text-lg
+                                      ${balance < item.usdtAmount ? 'bg-red-500' : 'bg-blue-500'}
+
+                                      ${requestPaymentCheck[index] ? 'bg-green-500' : 'bg-gray-500'}
+                                      
+                                    text-white px-4 py-2 rounded-md mt-4`}
+
+                                    onClick={() => {
+                                        //console.log('request Payment');
+                                        
+                                        ///router.push(`/chat?tradeId=12345`);
+
+                                        requstPayment(
+                                          index,
+                                          item._id,
+                                          item.tradeId,
+                                          item.usdtAmount,
+                                        );
+
+                                    }}
+                                  >
 
 
-                                  {escrowing[index] && (
+
+                                  {balance < item.usdtAmount ? (
 
                                     <div className="flex flex-col gap-2">
-                                      
                                       <div className="flex flex-row items-center gap-2">
-                                        <Image
+                                        <GearSetupIcon />
+                                        <div className="text-lg font-semibold">
+                                        {Request_Payment}
+                                        </div>
+                                      </div>
+
+                                      <div className="text-lg text-white">
+                                        Insufficient Balance
+                                      </div>
+                                      <div className="text-lg text-white">
+                                        You need {item.usdtAmount} USDT
+                                      </div>
+                                      <div className="text-lg text-white">
+                                        You have {balance} USDT
+                                      </div>
+                                      <div className="text-lg text-white">
+                                        Please top up your balance by depositing {item.usdtAmount - balance} USDT
+                                      </div>
+                                      <div className="text-lg text-white">
+                                        Your wallet address is
+                                      </div>
+                                      <div className="text-xs text-white">
+                                        {address.substring(0, 10)}...{address.substring(address.length - 10, address.length)}
+                                        
+                                      </div>
+                                      <div className="text-xs text-white">
+                                      
+                                        <button
+                                            onClick={() => {
+                                                navigator.clipboard.writeText(address);
+                                                toast.success('Address has been copied');
+                                            }}
+                                        className="text-xs bg-green-500 text-white px-2 py-1 rounded-md">Copy</button>
+                                      </div>
+                                    </div>
+
+                                  ) : (
+
+                                    <div className="flex flex-col gap-2">
+
+                                      <div className="flex flex-row items-center gap-2">
+                                        
+
+                                        {requestingPayment[index] || escrowing[index] ? (
+                                          <Image
                                             src='/loading.png'
                                             alt='loading'
                                             width={32}
                                             height={32}
                                             className="animate-spin"
-                                        />
-                                        <div className="text-lg font-semibold text-white">
-                                          Escrowing {item.usdtAmount} USDT...
+                                          />
+                                        ) : (
+                                          <GearSetupIcon />
+                                        )}
+
+
+                                        <div className="text-lg font-semibold">
+                                        {Request_Payment}
                                         </div>
                                       </div>
 
-                                    </div>
 
-                                  )}
-
-
-                                  {escrowing[index] === false && requestingPayment[index] === true && (
-                                    <div className="flex flex-col gpa-2">
-                                      {Escrow} {item.usdtAmount} USDT to the smart contract has been completed.
                                     </div>
                                   )}
 
 
-                                  {requestingPayment[index] && (
+                                </button>
 
-                                    <div className="p-2 flex flex-col gap-2">
-                                      
-                                      <div className="flex flex-row items-center gap-2">
-                                        <Image
-                                            src='/loading.png'
-                                            alt='loading'
-                                            width={50}
-                                            height={50}
-                                            className="animate-spin"
-                                        />
-                                        <div className="text-lg font-semibold text-white">
-                                          {Requesting_Payment}...
-                                        </div>
-                                      </div>
-
-                                    </div>
-
-                                  )}
+                                </div>
 
 
-                                  <div className="mt-5 flex flex-row items-center gap-2">
-                                    {/* dot */}
-                                    <div  className="w-2 h-2 rounded-full bg-green-500"></div>
+                              )}
 
-                                    <div className="text-sm text-zinc-400">
-                                      {/*
-                                      If you request payment, the {item.usdtAmount} USDT will be escrowed to the smart contract and then the buyer ( {item.buyer.nickname} ) will be requested to pay.
-                                      */}
 
-                                      {If_you_request_payment}
-                                    </div>
-                                  </div>
+                              
 
-                                  <div className="mt-5 flex flex-row items-center gap-2">
-                                      
-                                      <div className="flex flex-row items-center gap-2">
-                                        <input
-                                            type="checkbox"
-                                            checked={requestPaymentCheck[index]}
-                                            onChange={(e) => {
-                                              setRequestPaymentCheck(
-                                                requestPaymentCheck.map((item, idx) => {
-                                                  if (idx === index) {
-                                                    return e.target.checked;
-                                                  }
-                                                  return item;
-                                                })
-                                              );
-                                            }}
-                                            className=" w-6 h-6 rounded-md border border-gray-200"
-                                        />
-                                      </div>
-                                      <div className="text-sm text-zinc-400">
-                                        {/*
-                                        I agree to escrow {item.usdtAmount} USDT to the smart contract and request payment to the buyer ( {item.buyer.nickname} )
-                                        */}
 
-                                          {I_agree_to_escrow_USDT}
+                              {item.status === 'ordered' && (
+                                <>
 
-                                      </div>
+                                {acceptingSellOrder[index] ? (
+
+                                  <div className="flex flex-row items-center gap-2">
+                                    <Image
+                                      src='/loading.png'
+                                      alt='loading'
+                                      width={38}
+                                      height={38}
+                                      className="animate-spin"
+                                    />
+                                    <div>Accepting...</div>
                                   </div>
 
 
+                                ) : (
+                                  <>
+                                    
+                                    {item.walletAddress === address ? (
+                                      <div className="flex flex-col space-y-4">
+                                        {My_Order}
+                                      </div>
+                                    ) : (
+                                      <div className="w-full flex items-center justify-center">
 
-                                  <div className="mt-4 flex flex-col gap-2 text-sm text-left text-white">
-                                    <div className='flex flex-row items-center gap-2'>
-                                      {/* dot */}
-                                      <div  className="w-2 h-2 rounded-full bg-green-500"></div>
-                                      <span>
-                                        {Bank_Transfer} {Deposit_Information}
-                                      </span>
+                                        {item.status === 'ordered' && (
+                                          
+                                          // check if the order is expired
+                                          new Date().getTime() - new Date(item.createdAt).getTime() > 1000 * 60 * 60 * 24
+
+                                        ) ? (
+                                          
+                                          <Image
+                                            src="/icon-expired.png"
+                                            alt="Expired"
+                                            width={80}
+                                            height={80}
+                                          />
+                                        
+                                        ) : (
+
+                                          <div className='mt-4 flex flex-col items-center gap-2'>
+
+
+                                            {/* agreement for trade */}
+                                            <div className="flex flex-row items-center space-x-2">
+                                              <input
+                                                disabled={!address}
+                                                type="checkbox"
+                                                checked={agreementForTrade[index]}
+                                                onChange={(e) => {
+                                                    setAgreementForTrade(
+                                                        sellOrders.map((item, idx) => {
+                                                            if (idx === index) {
+                                                                return e.target.checked;
+                                                            } else {
+                                                                return false;
+                                                            }
+                                                        })
+                                                    );
+                                                }}
+                                              />
+                                              <label className="text-sm text-zinc-400">
+                                                {I_agree_to_the_terms_of_trade}
+                                              </label>
+                                            </div>
+
+
+
+                                          
+                                            <button
+                                              disabled={!address || !agreementForTrade[index]}
+                                              className={`text-lg text-white px-4 py-2 rounded-md
+                                              ${!user || !agreementForTrade[index] ? 'bg-zinc-800' : 'bg-green-500 hover:bg-green-600'}
+                                              `}
+
+                                              onClick={() => {
+
+                                                  acceoptSellOrder(index, item._id);
+                                            
+
+                                              }}
+                                            >
+                                              {Buy} {item.usdtAmount} USDT
+                                            </button>
+
+
+
+                                          </div>
+
+                                        )}
+
+                                      </div>
+
+
+
+                                      )}
+
+                                    </>
+
+                                  )}
+
+                                </>
+
+                              )}
+
+
+
+                              {/* bank transfer infomation */}
+                              {item.status === 'paymentRequested' && (
+
+                                <div className="mt-4 mb-10 flex flex-col items-start gap-2">
+
+                                  {/* escrow infomation */}
+                                  <div className='flex flex-row items-center gap-2'>
+
+                                    <Image
+                                      src='/smart-contract.png'
+                                      alt='Escrow'
+                                      width={32}
+                                      height={32}
+                                    />
+
+                                    <div className="text-lg font-semibold text-green-500">
+                                      {Escrow}: {item.usdtAmount} USDT
                                     </div>
-                                    <ul>
-                                      <li>
+
+                                    {/* polygon icon to go to polygon scan */}
+                                    <button
+                                      className="text-sm bg-green-500 text-white px-2 py-1 rounded-md"
+                                      onClick={() => {
+                                        {
+                                          params.chain === 'polygon' ?
+                                          window.open(`https://polygonscan.com/token/${contractAddress}?a=${item.walletAddress}`, '_blank')
+
+                                          : params.chain === 'arbitrum' ?
+
+                                          window.open(`https://explorer.arbitrum.io/token/${contractAddressArbitrum}?a=${item.walletAddress}`, '_blank')
+
+                                          : window.open(`https://polygonscan.com/token/${contractAddress}?a=${item.walletAddress}`, '_blank')
+
+                                        }
+                                      }}
+                                    >
+                                      <Image
+                                        src={params.chain === 'polygon' ? '/logo-polygon.png' : '/logo-arbitrum.png'}
+                                        alt="Chain"
+                                        width={24}
+                                        height={24}
+                                      />
+                                    </button>
+
+
+                                  </div>
+
+
+                                  <div className='flex flex-row items-center gap-2'>
+                                    <Image
+                                      src='/icon-bank.png'
+                                      alt='Bank'
+                                      width={32}
+                                      height={32}
+                                    />
+                                    <div className="text-lg font-semibold text-green-500">
+                                      {Bank_Transfer}
+                                    </div>
+                                    <span className="text-sm text-green-500">
+                                      {When_the_deposit_is_completed}
+                                    </span>
+                                  </div>
+
+
+
+
+                                  {address && (item.walletAddress === address || item.buyer?.walletAddress === address ) && (
+                                    <>
+                                      <div className='flex flex-row items-center justify-center gap-2'>
+                                        <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                                        <div className="text-sm ">
                                         {item.seller?.bankInfo.bankName}
                                         {' '}
                                         <button
@@ -2908,697 +3218,384 @@ export default function Index({ params }: any) {
                                           {item.seller?.bankInfo.accountNumber}
                                         </button>
                                         {' '}
+                                        <button
+                                          onClick={() => {
+                                              navigator.clipboard.writeText(item.seller?.bankInfo.accountNumber);
+                                              toast.success(Account_number_has_been_copied);
+                                          } }
+                                          className="text-xs bg-green-500 text-white px-2 py-1 rounded-md"
+                                        >
+                                          {Copy}
+                                        </button>
+                                        {' '}
                                         {item.seller?.bankInfo.accountHolder}
-                                      </li>
-                                      <li>{Deposit_Amount} : {item.krwAmount} KRW</li>
-                                      <li>{Deposit_Name} : {
-                                        item.buyer?.depositName ? item.buyer?.depositName : item.tradeId
-                                      }</li>
-                                    </ul>
-                                  </div>
-
-
-                                  <button
-                                      disabled={
-                                        balance < item.usdtAmount || requestingPayment[index] || escrowing[index]
-                                        || !requestPaymentCheck[index]
-                                      }
-                                      className={`w-full text-lg
-                                        ${balance < item.usdtAmount ? 'bg-red-500' : 'bg-blue-500'}
-
-                                        ${requestPaymentCheck[index] ? 'bg-green-500' : 'bg-gray-500'}
-                                        
-                                      text-white px-4 py-2 rounded-md mt-4`}
-
-                                      onClick={() => {
-                                          //console.log('request Payment');
-                                          
-                                          ///router.push(`/chat?tradeId=12345`);
-
-                                          requstPayment(
-                                            index,
-                                            item._id,
-                                            item.tradeId,
-                                            item.usdtAmount,
-                                          );
-
-                                      }}
-                                    >
-
-
-
-                                    {balance < item.usdtAmount ? (
-
-                                      <div className="flex flex-col gap-2">
-                                        <div className="flex flex-row items-center gap-2">
-                                          <GearSetupIcon />
-                                          <div className="text-lg font-semibold">
-                                          {Request_Payment}
-                                          </div>
-                                        </div>
-
-                                        <div className="text-lg text-white">
-                                          Insufficient Balance
-                                        </div>
-                                        <div className="text-lg text-white">
-                                          You need {item.usdtAmount} USDT
-                                        </div>
-                                        <div className="text-lg text-white">
-                                          You have {balance} USDT
-                                        </div>
-                                        <div className="text-lg text-white">
-                                          Please top up your balance by depositing {item.usdtAmount - balance} USDT
-                                        </div>
-                                        <div className="text-lg text-white">
-                                          Your wallet address is
-                                        </div>
-                                        <div className="text-xs text-white">
-                                          {address.substring(0, 10)}...{address.substring(address.length - 10, address.length)}
-                                          
-                                        </div>
-                                        <div className="text-xs text-white">
-                                        
-                                          <button
-                                              onClick={() => {
-                                                  navigator.clipboard.writeText(address);
-                                                  toast.success('Address has been copied');
-                                              }}
-                                          className="text-xs bg-green-500 text-white px-2 py-1 rounded-md">Copy</button>
                                         </div>
                                       </div>
 
-                                    ) : (
 
-                                      <div className="flex flex-col gap-2">
-
-                                        <div className="flex flex-row items-center gap-2">
-                                          
-
-                                          {requestingPayment[index] || escrowing[index] ? (
-                                            <Image
-                                              src='/loading.png'
-                                              alt='loading'
-                                              width={32}
-                                              height={32}
-                                              className="animate-spin"
-                                            />
-                                          ) : (
-                                            <GearSetupIcon />
-                                          )}
-
-
-                                          <div className="text-lg font-semibold">
-                                          {Request_Payment}
-                                          </div>
-                                        </div>
-
-
-                                      </div>
-                                    )}
-
-
-                                  </button>
-
-                                  </div>
-
-
-                                )}
-
-
-                                
-
-
-                                {item.status === 'ordered' && (
-                                  <>
-
-                                  {acceptingSellOrder[index] ? (
-
-                                    <div className="flex flex-row items-center gap-2">
-                                      <Image
-                                        src='/loading.png'
-                                        alt='loading'
-                                        width={38}
-                                        height={38}
-                                        className="animate-spin"
-                                      />
-                                      <div>Accepting...</div>
-                                    </div>
-
-
-                                  ) : (
-                                    <>
-                                      
-                                      {item.walletAddress === address ? (
-                                        <div className="flex flex-col space-y-4">
-                                          {My_Order}
-                                        </div>
-                                      ) : (
-                                        <div className="w-full flex items-center justify-center">
-
-                                          {item.status === 'ordered' && (
-                                            
-                                            // check if the order is expired
-                                            new Date().getTime() - new Date(item.createdAt).getTime() > 1000 * 60 * 60 * 24
-
-                                          ) ? (
-                                            
-                                            <Image
-                                              src="/icon-expired.png"
-                                              alt="Expired"
-                                              width={80}
-                                              height={80}
-                                            />
-                                          
-                                          ) : (
-
-                                            <div className='mt-4 flex flex-col items-center gap-2'>
-
-
-                                              {/* agreement for trade */}
-                                              <div className="flex flex-row items-center space-x-2">
-                                                <input
-                                                  disabled={!address}
-                                                  type="checkbox"
-                                                  checked={agreementForTrade[index]}
-                                                  onChange={(e) => {
-                                                      setAgreementForTrade(
-                                                          sellOrders.map((item, idx) => {
-                                                              if (idx === index) {
-                                                                  return e.target.checked;
-                                                              } else {
-                                                                  return false;
-                                                              }
-                                                          })
-                                                      );
-                                                  }}
-                                                />
-                                                <label className="text-sm text-zinc-400">
-                                                  {I_agree_to_the_terms_of_trade}
-                                                </label>
-                                              </div>
-
-
-
-                                            
-                                              <button
-                                                disabled={!address || !agreementForTrade[index]}
-                                                className={`text-lg text-white px-4 py-2 rounded-md
-                                                ${!user || !agreementForTrade[index] ? 'bg-zinc-800' : 'bg-green-500 hover:bg-green-600'}
-                                                `}
-
-                                                onClick={() => {
-
-                                                    acceoptSellOrder(index, item._id);
-                                              
-
-                                                }}
-                                              >
-                                                {Buy} {item.usdtAmount} USDT
-                                              </button>
-
-
-
-                                            </div>
-
-                                          )}
-
-                                        </div>
-
-
-
-                                        )}
-
-                                      </>
-
-                                    )}
-
-                                  </>
-
-                                )}
-
-
-
-                                {/* bank transfer infomation */}
-                                {item.status === 'paymentRequested' && (
-
-                                  <div className="mt-4 mb-10 flex flex-col items-start gap-2">
-
-                                    {/* escrow infomation */}
-                                    <div className='flex flex-row items-center gap-2'>
-
-                                      <Image
-                                        src='/smart-contract.png'
-                                        alt='Escrow'
-                                        width={32}
-                                        height={32}
-                                      />
-
-                                      <div className="text-lg font-semibold text-green-500">
-                                        {Escrow}: {item.usdtAmount} USDT
-                                      </div>
-
-                                      {/* polygon icon to go to polygon scan */}
-                                      <button
-                                        className="text-sm bg-green-500 text-white px-2 py-1 rounded-md"
-                                        onClick={() => {
-                                          {
-                                            params.chain === 'polygon' ?
-                                            window.open(`https://polygonscan.com/token/${contractAddress}?a=${item.walletAddress}`, '_blank')
-
-                                            : params.chain === 'arbitrum' ?
-
-                                            window.open(`https://explorer.arbitrum.io/token/${contractAddressArbitrum}?a=${item.walletAddress}`, '_blank')
-
-                                            : window.open(`https://polygonscan.com/token/${contractAddress}?a=${item.walletAddress}`, '_blank')
-
-                                          }
-                                        }}
-                                      >
-                                        <Image
-                                          src={params.chain === 'polygon' ? '/logo-polygon.png' : '/logo-arbitrum.png'}
-                                          alt="Chain"
-                                          width={24}
-                                          height={24}
-                                        />
-                                      </button>
-
-
-                                    </div>
-
-
-                                    <div className='flex flex-row items-center gap-2'>
-                                      <Image
-                                        src='/icon-bank.png'
-                                        alt='Bank'
-                                        width={32}
-                                        height={32}
-                                      />
-                                      <div className="text-lg font-semibold text-green-500">
-                                        {Bank_Transfer}
-                                      </div>
-                                      <span className="text-sm text-green-500">
-                                        {When_the_deposit_is_completed}
-                                      </span>
-                                    </div>
-
- 
-
-
-                                    {address && (item.walletAddress === address || item.buyer?.walletAddress === address ) && (
-                                      <>
-                                        <div className='flex flex-row items-center justify-center gap-2'>
-                                          <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                                          <div className="text-sm ">
-                                          {item.seller?.bankInfo.bankName}
-                                          {' '}
+                                      <div className='flex flex-row items-center gap-2'>
+                                        <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                                        <div className="text-sm">
+                                          {Deposit_Name}:{' '}
                                           <button
                                             onClick={() => {
-                                                navigator.clipboard.writeText(item.seller?.bankInfo.accountNumber);
-                                                toast.success(Account_number_has_been_copied);
+                                                navigator.clipboard.writeText(item.buyer?.depositName ? item.buyer?.depositName : item.tradeId);
+                                                toast.success(Payment_name_has_been_copied);
                                             } }
-                                            className='text-lg font-semibold'
+                                            className="text-lg font-semibold"
                                           >
-                                            {item.seller?.bankInfo.accountNumber}
+                                            {item.buyer?.depositName ? item.buyer?.depositName : item.tradeId}
                                           </button>
                                           {' '}
                                           <button
                                             onClick={() => {
-                                                navigator.clipboard.writeText(item.seller?.bankInfo.accountNumber);
-                                                toast.success(Account_number_has_been_copied);
+                                                navigator.clipboard.writeText(item.buyer?.depositName ? item.buyer?.depositName : item.tradeId);
+                                                toast.success(Payment_name_has_been_copied);
                                             } }
                                             className="text-xs bg-green-500 text-white px-2 py-1 rounded-md"
                                           >
                                             {Copy}
                                           </button>
+                                        </div>
+                                      </div>
+
+                                      <div className='flex flex-row items-center gap-2'>
+                                        <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                                        <div className="text-sm">
+                                          {Deposit_Amount}:{' '}
+
+                                          <button
+                                            onClick={() => {
+                                                navigator.clipboard.writeText(item.krwAmount.toString());
+                                                toast.success(Payment_amount_has_been_copied);
+                                            } }
+                                            className="text-lg font-semibold"
+                                          >
+                                            {item.krwAmount.toLocaleString('ko-KR', {
+                                                style: 'currency',
+                                                currency: 'KRW'
+                                              })
+                                            }
+                                          </button>
                                           {' '}
-                                          {item.seller?.bankInfo.accountHolder}
-                                          </div>
+                                          <button
+                                            onClick={() => {
+                                                navigator.clipboard.writeText(item.krwAmount.toString());
+                                                toast.success(Payment_amount_has_been_copied);
+                                            } }
+                                            className="text-xs bg-green-500 text-white px-2 py-1 rounded-md"
+                                          >
+                                            {Copy}
+                                          </button>
                                         </div>
-
-
-                                        <div className='flex flex-row items-center gap-2'>
-                                          <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                                          <div className="text-sm">
-                                            {Deposit_Name}:{' '}
-                                            <button
-                                              onClick={() => {
-                                                  navigator.clipboard.writeText(item.buyer?.depositName ? item.buyer?.depositName : item.tradeId);
-                                                  toast.success(Payment_name_has_been_copied);
-                                              } }
-                                              className="text-lg font-semibold"
-                                            >
-                                              {item.buyer?.depositName ? item.buyer?.depositName : item.tradeId}
-                                            </button>
-                                            {' '}
-                                            <button
-                                              onClick={() => {
-                                                  navigator.clipboard.writeText(item.buyer?.depositName ? item.buyer?.depositName : item.tradeId);
-                                                  toast.success(Payment_name_has_been_copied);
-                                              } }
-                                              className="text-xs bg-green-500 text-white px-2 py-1 rounded-md"
-                                            >
-                                              {Copy}
-                                            </button>
-                                          </div>
-                                        </div>
-
-                                        <div className='flex flex-row items-center gap-2'>
-                                          <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                                          <div className="text-sm">
-                                            {Deposit_Amount}:{' '}
-
-                                            <button
-                                              onClick={() => {
-                                                  navigator.clipboard.writeText(item.krwAmount.toString());
-                                                  toast.success(Payment_amount_has_been_copied);
-                                              } }
-                                              className="text-lg font-semibold"
-                                            >
-                                              {item.krwAmount.toLocaleString('ko-KR', {
-                                                  style: 'currency',
-                                                  currency: 'KRW'
-                                                })
-                                              }
-                                            </button>
-                                            {' '}
-                                            <button
-                                              onClick={() => {
-                                                  navigator.clipboard.writeText(item.krwAmount.toString());
-                                                  toast.success(Payment_amount_has_been_copied);
-                                              } }
-                                              className="text-xs bg-green-500 text-white px-2 py-1 rounded-md"
-                                            >
-                                              {Copy}
-                                            </button>
-                                          </div>
-                                        </div>
-
-                                      </>
-
-                                    )}
-
-
-
-
-                                    <div className='flex flex-row items-center gap-2'>
-                                      <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                                      <div className="text-sm">
-                                        {Deposit_Deadline}: {
-                                        
-                                          new Date(new Date(item.paymentRequestedAt).getTime() + 1000 * 60 * 60 * 1).toLocaleString()
-                                        
-                                        }
                                       </div>
+
+                                    </>
+
+                                  )}
+
+
+
+
+                                  <div className='flex flex-row items-center gap-2'>
+                                    <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                                    <div className="text-sm">
+                                      {Deposit_Deadline}: {
+                                      
+                                        new Date(new Date(item.paymentRequestedAt).getTime() + 1000 * 60 * 60 * 1).toLocaleString()
+                                      
+                                      }
                                     </div>
-
-
-                                    {/* waiting for receive USDT */}
-
-                                    {!address && (
-                                  
-                                      <div className="mt-4 flex flex-row gap-2 items-center justify-start">
-
-                                        {/* rotate loading icon */}
-                                      
-                                        <Image
-                                          src="/loading.png"
-                                          alt="Escrow"
-                                          width={32}
-                                          height={32}
-                                          className="animate-spin"
-                                        />
-
-                                        <div>{Waiting_for_seller_to_confirm_payment}...</div>
-
-                                      </div>
-                                      
-                                    )}  
-
                                   </div>
-                                )}
 
 
+                                  {/* waiting for receive USDT */}
 
+                                  {!address && (
+                                
+                                    <div className="mt-4 flex flex-row gap-2 items-center justify-start">
 
-
-
-
-
-                                {address && item.walletAddress === address && item.status === 'paymentRequested' && (
-
-                                <div className="w-full mt-4 mb-2 flex flex-col items-start ">
-
-
-                                  
-                                  
-                                  <div className="w-full flex flex-col items-start gap-2">
-
-                                    {/*
-                                    <div className="flex flex-row items-center gap-2">
-
+                                      {/* rotate loading icon */}
+                                    
                                       <Image
-                                        src='/smart-contract.png'
-                                        alt='smart-contract'
+                                        src="/loading.png"
+                                        alt="Escrow"
                                         width={32}
                                         height={32}
+                                        className="animate-spin"
                                       />
 
-                                      <span className="textlg text-white">
-                                        Escrow: {item.usdtAmount} USDT
-                                      </span>
-
-                                      <button
-                                          className="ml-5 text-sm bg-white text-white px-2 py-1 rounded-md"
-                                          onClick={() => {
-                                              //console.log('Cancel Payment Request');
-                                              // new window
-
-                                              window.open(`https://polygonscan.com/token/0xc2132d05d31c914a87c6611c10748aeb04b58e8f?a=0x7b773c495b91eec3c549c7f811d5c53241cef41f`, '_blank');
-                                          }}
-                                      >
-                                        <Image
-                                          src='/logo-polygon.png'
-                                          alt='cancel'
-                                          width={20}
-                                          height={20}
-                                        />
-                                      </button>
-
+                                      <div>{Waiting_for_seller_to_confirm_payment}...</div>
 
                                     </div>
-                                    */}
+                                    
+                                  )}  
+
+                                </div>
+                              )}
 
 
 
 
-                                  
-                                    { 
-                                      item.status === 'paymentRequested'
-                                      && requestingPayment[index]
-                                      && confirmingPayment[index] === false
-                                      && (
-
-                                      <div className="flex flex-col gap-2">
-                                        
-                                        <div className="flex flex-row items-center gap-2">
-                                          <Image
-                                              src='/loading.png'
-                                              alt='loading'
-                                              width={32}
-                                              height={32}
-                                              className="animate-spin"
-                                          />
-                                          <div className="text-lg font-semibold text-white">
-                                            
-                                            {Checking_the_bank_transfer_from_the_buyer} ( {
-                                              item.buyer.nickname ? item.buyer.nickname : Anonymous
-                                            } )...
-
-
-                                          </div>
-                                        </div>
-
-                                      </div>
-
-                                    )}
-
-
-                                    {/*
-                                    <div className="mt-5 flex flex-row items-center gap-2">
-                                      <div  className="flex w-2 h-2 rounded-full bg-green-500"></div>
-
-                                      <div className="text-sm text-zinc-400">
-                                        If you confirm the payment, the escrowed {item.usdtAmount} USDT will be transferred to the buyer ( {item.buyer.nickname} ) wallet address.
-                                      </div>
-                                    </div>
-                                    */}
-
-                                    {/* check box for confirming payment */}
-
-                                    <div className="flex flex-row items-center gap-2">
-
-                                      <div className="flex flex-row items-center gap-2">
-                                        <input
-                                            type="checkbox"
-                                            checked={confirmPaymentCheck[index]}
-                                            onChange={(e) => {
-                                              setConfirmPaymentCheck(
-                                                confirmPaymentCheck.map((item, idx) => {
-                                                  if (idx === index) {
-                                                    return e.target.checked;
-                                                  }
-                                                  return item;
-                                                })
-                                              );
-                                            }}
-                                            className=" w-6 h-6 rounded-md border border-gray-200"
-                                        />
-                                      </div>
-
-                                      <span className="text-sm text-zinc-400">
-                                        {/*
-                                        I agree to check the bank transfer of {
-                                        item.krwAmount.toLocaleString('ko-KR', {
-                                          style: 'currency',
-                                          currency: 'KRW',
-                                        })} from buyer ( {item.buyer.nickname} ) and transfer {item.usdtAmount} USDT to the buyer wallet address.
-                                        */}
 
 
 
-                                        {I_agree_to_check_the_bank_transfer_of}
+
+                              {address && item.walletAddress === address && item.status === 'paymentRequested' && (
+
+                              <div className="w-full mt-4 mb-2 flex flex-col items-start ">
 
 
-                                      </span>
+                                
+                                
+                                <div className="w-full flex flex-col items-start gap-2">
 
-                                    </div>
+                                  {/*
+                                  <div className="flex flex-row items-center gap-2">
 
+                                    <Image
+                                      src='/smart-contract.png'
+                                      alt='smart-contract'
+                                      width={32}
+                                      height={32}
+                                    />
 
+                                    <span className="textlg text-white">
+                                      Escrow: {item.usdtAmount} USDT
+                                    </span>
+
+                                    <button
+                                        className="ml-5 text-sm bg-white text-white px-2 py-1 rounded-md"
+                                        onClick={() => {
+                                            //console.log('Cancel Payment Request');
+                                            // new window
+
+                                            window.open(`https://polygonscan.com/token/0xc2132d05d31c914a87c6611c10748aeb04b58e8f?a=0x7b773c495b91eec3c549c7f811d5c53241cef41f`, '_blank');
+                                        }}
+                                    >
+                                      <Image
+                                        src='/logo-polygon.png'
+                                        alt='cancel'
+                                        width={20}
+                                        height={20}
+                                      />
+                                    </button>
 
 
                                   </div>
-                                    
+                                  */}
 
 
-                                  {confirmingPayment[index] ? (
 
-                                    <div className="p-2 flex flex-row items-center gap-2">
 
-                                      <Image
-                                          src='/loading.png'
-                                          alt='loading'
-                                          width={32}
-                                          height={32}
-                                          className="animate-spin"
-                                      />
-                                      <div className="text-lg font-semibold text-white">
+                                
+                                  { 
+                                    item.status === 'paymentRequested'
+                                    && requestingPayment[index]
+                                    && confirmingPayment[index] === false
+                                    && (
 
-                                        {/*
-                                        Transfering {item.usdtAmount} USDT to the buyer ( {item.buyer.nickname} ) wallet address...
-                                        */}
-                                        {Transfering_USDT_to_the_buyer_wallet_address}...
-                                    
+                                    <div className="flex flex-col gap-2">
+                                      
+                                      <div className="flex flex-row items-center gap-2">
+                                        <Image
+                                            src='/loading.png'
+                                            alt='loading'
+                                            width={32}
+                                            height={32}
+                                            className="animate-spin"
+                                        />
+                                        <div className="text-lg font-semibold text-white">
+                                          
+                                          {Checking_the_bank_transfer_from_the_buyer} ( {
+                                            item.buyer.nickname ? item.buyer.nickname : Anonymous
+                                          } )...
+
+
+                                        </div>
                                       </div>
+
                                     </div>
 
-                                  ) : (
+                                  )}
 
-                                      <button
-                                          disabled={
-                                            confirmingPayment[index]
-                                            || !confirmPaymentCheck[index]
-                                        }
-                                          className={`w-full text-lg
-                                            ${confirmPaymentCheck[index] ? 'bg-green-500' : 'bg-gray-500'}
-                                            text-white px-4 py-2 rounded-md mt-4`}
-                                          onClick={() => {
-                                              console.log('Canfirm Payment');
 
-                                              //toast.success('Payment has been confirmed');
+                                  {/*
+                                  <div className="mt-5 flex flex-row items-center gap-2">
+                                    <div  className="flex w-2 h-2 rounded-full bg-green-500"></div>
 
-                                              confirmPayment(index, item._id);
-                                              
+                                    <div className="text-sm text-zinc-400">
+                                      If you confirm the payment, the escrowed {item.usdtAmount} USDT will be transferred to the buyer ( {item.buyer.nickname} ) wallet address.
+                                    </div>
+                                  </div>
+                                  */}
+
+                                  {/* check box for confirming payment */}
+
+                                  <div className="flex flex-row items-center gap-2">
+
+                                    <div className="flex flex-row items-center gap-2">
+                                      <input
+                                          type="checkbox"
+                                          checked={confirmPaymentCheck[index]}
+                                          onChange={(e) => {
+                                            setConfirmPaymentCheck(
+                                              confirmPaymentCheck.map((item, idx) => {
+                                                if (idx === index) {
+                                                  return e.target.checked;
+                                                }
+                                                return item;
+                                              })
+                                            );
                                           }}
-                                      >
-                                        {Confirm_Payment}
-                                      </button>
-                                    
-                                    )}
+                                          className=" w-6 h-6 rounded-md border border-gray-200"
+                                      />
+                                    </div>
+
+                                    <span className="text-sm text-zinc-400">
+                                      {/*
+                                      I agree to check the bank transfer of {
+                                      item.krwAmount.toLocaleString('ko-KR', {
+                                        style: 'currency',
+                                        currency: 'KRW',
+                                      })} from buyer ( {item.buyer.nickname} ) and transfer {item.usdtAmount} USDT to the buyer wallet address.
+                                      */}
+
+
+
+                                      {I_agree_to_check_the_bank_transfer_of}
+
+
+                                    </span>
+
+                                  </div>
+
+
 
 
                                 </div>
+                                  
 
 
-                                )}
+                                {confirmingPayment[index] ? (
 
+                                  <div className="p-2 flex flex-row items-center gap-2">
 
-                                {/* buyer mobile number */}
-                                {/*address && item.buyer?.walletAddress === address && (
-                                  <div className="mt-4 flex flex-row items-center gap-2">
-                                    <div className="text-lg font-semibold text-green-500">
-                                      SMS: {item.buyer?.mobile}
+                                    <Image
+                                        src='/loading.png'
+                                        alt='loading'
+                                        width={32}
+                                        height={32}
+                                        className="animate-spin"
+                                    />
+                                    <div className="text-lg font-semibold text-white">
+
+                                      {/*
+                                      Transfering {item.usdtAmount} USDT to the buyer ( {item.buyer.nickname} ) wallet address...
+                                      */}
+                                      {Transfering_USDT_to_the_buyer_wallet_address}...
+                                  
                                     </div>
                                   </div>
-                                )*/}
+
+                                ) : (
+
+                                    <button
+                                        disabled={
+                                          confirmingPayment[index]
+                                          || !confirmPaymentCheck[index]
+                                      }
+                                        className={`w-full text-lg
+                                          ${confirmPaymentCheck[index] ? 'bg-green-500' : 'bg-gray-500'}
+                                          text-white px-4 py-2 rounded-md mt-4`}
+                                        onClick={() => {
+                                            console.log('Canfirm Payment');
+
+                                            //toast.success('Payment has been confirmed');
+
+                                            confirmPayment(index, item._id);
+                                            
+                                        }}
+                                    >
+                                      {Confirm_Payment}
+                                    </button>
+                                  
+                                  )}
 
 
-                            </article>
+                              </div>
 
 
-                          </div>
+                              )}
 
 
+                              {/* buyer mobile number */}
+                              {/*address && item.buyer?.walletAddress === address && (
+                                <div className="mt-4 flex flex-row items-center gap-2">
+                                  <div className="text-lg font-semibold text-green-500">
+                                    SMS: {item.buyer?.mobile}
+                                  </div>
+                                </div>
+                              )*/}
 
 
+                          </article>
 
 
-
-                        
                         </div>
 
 
-                      ))}
-
-                  </div>
-
-                  {orderId && address && user && user.nickname && sellOrders.length > 0 && sellOrders[0].status !== 'paymentConfirmed' && sellOrders[0].status !== 'ordered' && (
-                    <div className=' w-full hidden'>
-                      <Chat
-
-                        channel={orderId}
-
-                        userId={ user.nickname }
-
-                        nickname={ user.nickname }
-
-                        profileUrl={ user.avatar }
-                      />
-                    </div>
-                  )}
 
 
+
+
+
+                      
+                      </div>
+
+
+                    ))}
 
                 </div>
-              )}
+
+                {orderId && address && user && user.nickname && sellOrders.length > 0 && sellOrders[0].status !== 'paymentConfirmed' && sellOrders[0].status !== 'ordered' && (
+                  <div className=' w-full hidden'>
+                    <Chat
+
+                      channel={orderId}
+
+                      userId={ user.nickname }
+
+                      nickname={ user.nickname }
+
+                      profileUrl={ user.avatar }
+                    />
+                  </div>
+                )}
+
+
+
+              </div>
+            )}
 
 
 
 
-            
-          </div>
+          
+        </div>
 
 
-          <Modal isOpen={isModalOpen} onClose={closeModal}>
-              <TradeDetail
-                  closeModal={closeModal}
-                  //goChat={goChat}
-              />
-          </Modal>
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
+            <TradeDetail
+                closeModal={closeModal}
+                //goChat={goChat}
+            />
+        </Modal>
 
 
-        </main>
+      </main>
 
-    );
+  );
 
 
 };
