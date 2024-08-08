@@ -597,13 +597,16 @@ export default function Index({ params }: any) {
 
           {/* logo image  goodtether_logo.png */}
 
-          <div className=" w-40 h-10 flex flex-row justify-center items-center gap-2">
+          <div className="flex flex-row justify-center items-center gap-2">
             <Image
               src="/goodtether_logo.png"
               alt="GoodTether"
               width={100}
               height={20}
             />
+            <h1 className="text-2xl text-white font-bold">
+              GoodTether
+            </h1>
           </div>
 
           <AppBarComponent />

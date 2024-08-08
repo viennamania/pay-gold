@@ -1752,6 +1752,22 @@ export default function Index({ params }: any) {
           history back
           */}
 
+          {/* logo image goodtether_logo.png */}
+          <div className="flex items-center justify-center gap-2">
+            <Image
+              src="/goodtether_logo.png"
+              alt="GoodTether"
+              width={48}
+              height={48}
+            />
+            <h1 className="text-2xl text-white font-bold">
+              GoodTether
+            </h1>
+          </div>
+
+
+
+
           <AppBarComponent />
   
           <div className="hidden mt-4 w-full flex-row gap-5 justify-center mb-10">
