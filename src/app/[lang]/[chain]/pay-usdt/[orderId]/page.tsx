@@ -346,6 +346,8 @@ export default function Index({ params }: any) {
 
       Payment_amount_has_been_copied: "",
 
+      My_ID: "",
+
 
     } );
   
@@ -487,6 +489,8 @@ export default function Index({ params }: any) {
       Payment_name_has_been_copied,
 
       Payment_amount_has_been_copied,
+
+      My_ID,
 
     } = data;
    
@@ -1805,13 +1809,33 @@ export default function Index({ params }: any) {
             {/* wallet address */}
             <div className='flex flex-row gap-2 items-center justify-center'>
               {/* store code */}
+              {/*
               <div className="text-lg text-white">
                 상점: {
-                  storecode ? storecode : sellOrders.length > 0 ? sellOrders[0]?.buyer.nickname?.split('@').slice(-1)[0] : ''
+                  //storecode ? storecode : sellOrders.length > 0 ? sellOrders[0]?.buyer.nickname?.split('@').slice(-1)[0] : ''
+                
+                  storecode
                 }
               </div>
+              */}
+              {/* store image  store-storecode.png */}
+              {/* button to new window url: https://vienna-mania.vercel.app/ */}
+              <button
+                onClick={() => {
+                  window.open('https://vienna-mania.vercel.app/', '_blank');
+                }}
+                className="text-lg bg-blue-500 text-white px-4 py-2 rounded-md"
+              >
+                <Image
+                  src={'/store-' + storecode + '.png'}
+                  alt="Store"
+                  width={48}
+                  height={48}
+                />
+              </button>
+              {/* member id */}
               <div className="text-lg text-white">
-                아이디: {
+                {My_ID}: {
                   memberid ? memberid : sellOrders.length > 0 ? sellOrders[0]?.buyer.nickname?.split('@').slice(0, -1).join('@') : ''
                 }
               </div>

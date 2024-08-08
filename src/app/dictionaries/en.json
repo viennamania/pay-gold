@@ -366,7 +366,9 @@
     "Drag_and_drop_or_click_to_upload": "Drag and drop or click to upload.",
     "Max_file_size": "Max file size: 50MB",
     "Photo_upload": "Photo upload",
-    "Confirm_upload": "Confirm upload"
+    "Confirm_upload": "Confirm upload",
+
+    "My_ID": "My ID"
 
 
 }
