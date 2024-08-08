@@ -285,7 +285,7 @@ export default function SettingsPage() {
                             {
                                 logoUrl: "https://goodtether.com/goodtether_logo.png",
                                 name: "Next App",
-                                url: "https://next.unove.space",
+                                url: "https://goodtether.com",
                                 description: "This is a Next App.",
 
                             }

@@ -570,7 +570,7 @@ export default function Index({ params }: any) {
         body: JSON.stringify({
           name: tradeId,
           channel_url: orderId,
-          cover_url: 'https://next.unove.space/icon-trade.png',
+          cover_url: 'https://goodtether.com/icon-trade.png',
           custom_type: 'trade',
 
         }),
@@ -1690,7 +1690,7 @@ export default function Index({ params }: any) {
                                       //router.push(`/sell-usdt/${item._id}`);
 
                                       // copy link to clipboard
-                                      navigator.clipboard.writeText(`https://next.unove.space/${params.lang}/sell-usdt/${item._id}`);
+                                      navigator.clipboard.writeText(`https://goodtether.com/${params.lang}/sell-usdt/${item._id}`);
                                       toast.success('Link has been copied');
 
                                     }}

@@ -392,7 +392,7 @@ export default function Index({ params }: any) {
         body: JSON.stringify({
           name: tradeId,
           channel_url: orderId,
-          cover_url: 'https://next.unove.space/icon-trade.png',
+          cover_url: 'https://goodtether.com/icon-trade.png',
           custom_type: 'trade',
 
         }),
@@ -777,7 +777,7 @@ export default function Index({ params }: any) {
                             {
                                 logoUrl: "https://goodtether.com/goodtether_logo.png",
                                 name: "Next App",
-                                url: "https://next.unove.space",
+                                url: "https://goodtether.com",
                                 description: "This is a Next App.",
 
                             }
@@ -1036,7 +1036,7 @@ export default function Index({ params }: any) {
                                     className="text-sm bg-blue-500 text-white px-2 py-1 rounded-md hover:bg-blue-600"
                                     onClick={() => {
 
-                                      window.open(`https://next.unove.space/${params.lang}/sell-usdt/${item._id}`, '_blank');
+                                      window.open(`https://goodtether.com/${params.lang}/sell-usdt/${item._id}`, '_blank');
 
                                     }}
                                   >
@@ -1136,7 +1136,7 @@ export default function Index({ params }: any) {
                                     className="ml-5 text-sm bg-blue-500 text-white px-2 py-1 rounded-md hover:bg-blue-600"
                                     onClick={() => {
 
-                                      window.open(`https://next.unove.space/${params.lang}/sell-usdt/${item._id}`, '_blank');
+                                      window.open(`https://goodtether.com/${params.lang}/sell-usdt/${item._id}`, '_blank');
 
                                     }}
                                   >

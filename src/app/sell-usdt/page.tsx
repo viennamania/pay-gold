@@ -536,7 +536,7 @@ const P2PTable = () => {
                             {
                                 logoUrl: "https://goodtether.com/goodtether_logo.png",
                                 name: "Next App",
-                                url: "https://next.unove.space",
+                                url: "https://goodtether.com",
                                 description: "This is a Next App.",
 
                             }
@@ -1468,7 +1468,7 @@ const P2PTable = () => {
                                       ////router.push(`/sell-usdt/${item._id}`);
 
                                       // copy to clipboard
-                                      navigator.clipboard.writeText(`https://next.unove.space/en/sell-usdt/${item._id}`);
+                                      navigator.clipboard.writeText(`https://goodtether.com/en/sell-usdt/${item._id}`);
                                       toast.success('Link has been copied to clipboard');
 
                                     }}

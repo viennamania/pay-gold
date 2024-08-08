@@ -587,7 +587,7 @@ export default function Index({ params }: any) {
             client={client}
             appMetadata={{
               name: "Next App",
-              url: "https://next.unove.space",
+              url: "https://goodtether.com",
             }}
           />
           */}
@@ -1113,7 +1113,7 @@ export default function Index({ params }: any) {
                 {
                   logoUrl: "https://goodtether.com/goodtether_logo.png",
                   name: "Next App",
-                  url: "https://next.unove.space",
+                  url: "https://goodtether.com",
                   description: "This is a Next App.",
 
                 }

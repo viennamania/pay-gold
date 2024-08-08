@@ -817,7 +817,7 @@ export default function Index({ params }: any) {
                             {
                               logoUrl: "https://goodtether.com/goodtether_logo.png",
                               name: "Next App",
-                              url: "https://next.unove.space",
+                              url: "https://goodtether.com",
                               description: "This is a Next App.",
 
                             }
@@ -860,7 +860,7 @@ export default function Index({ params }: any) {
                               {
                                 logoUrl: "https://goodtether.com/goodtether_logo.png",
                                 name: "Next App",
-                                url: "https://next.unove.space",
+                                url: "https://goodtether.com",
                                 description: "This is a Next App.",
 
                               }
@@ -1979,7 +1979,7 @@ export default function Index({ params }: any) {
                                       ////router.push(`/sell-usdt/${item._id}`);
 
                                       // copy to clipboard
-                                      navigator.clipboard.writeText(`https://next.unove.space/${params.lang}/sell-usdt/${item._id}`);
+                                      navigator.clipboard.writeText(`https://goodtether.com/${params.lang}/sell-usdt/${item._id}`);
                                       toast.success('Link has been copied to clipboard');
 
                                     }}

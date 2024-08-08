@@ -521,7 +521,7 @@ export default function SendUsdt() {
                   {
                       logoUrl: "https://goodtether.com/goodtether_logo.png",
                       name: "Next App",
-                      url: "https://next.unove.space",
+                      url: "https://goodtether.com",
                       description: "This is a Next App.",
 
                   }
