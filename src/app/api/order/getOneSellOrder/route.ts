@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
  
   return NextResponse.json({
 
-    result: data
+    result: data.result
     
   });
   
