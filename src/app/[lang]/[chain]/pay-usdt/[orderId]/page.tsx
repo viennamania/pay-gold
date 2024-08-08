@@ -811,6 +811,7 @@ export default function Index({ params }: any) {
 
           // api call
           const response = await fetch('/api/order/getOneSellOrder', {
+
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
