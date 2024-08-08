@@ -1759,12 +1759,9 @@ export default function Index({ params }: any) {
           <Image
             src="/goodtether_logo.png"
             alt="GoodTether"
-            width={48}
-            height={48}
+            width={500}
+            height={100}
           />
-          <h1 className="text-2xl text-white font-bold">
-            GoodTether
-          </h1>
         </div>
 
 
