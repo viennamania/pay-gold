@@ -1827,7 +1827,7 @@ export default function Index({ params }: any) {
                 className="text-lg bg-blue-500 text-white px-4 py-2 rounded-md"
               >
                 <Image
-                  src={'/store-' + storecode + '.png'}
+                  src={'/store-2000001.png'}
                   alt="Store"
                   width={48}
                   height={48}
